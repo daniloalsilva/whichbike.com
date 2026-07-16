@@ -180,7 +180,71 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <div class="compare-header" style="text-align: center; margin-bottom: 3rem; margin-top: -1.5rem;">
+        <style>
+  /* Apple layout wide overrides */
+  @media (min-width: 64em) {
+    .sidebar {
+      display: none !important;
+    }
+    .archive, .page {
+      width: 100% !important;
+      max-width: 1200px !important;
+      padding-right: 0 !important;
+      margin: 0 auto !important;
+    }
+  }
+
+  .compare-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 2rem;
+  }
+
+  .compare-cell {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  .metric-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .big-metric {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+    line-height: 1.1;
+  }
+
+  .text-spec {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1.2;
+  }
+
+  .empty-cell {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    padding: 2rem 0;
+  }
+</style>
+
+<div class="compare-header" style="text-align: center; margin-bottom: 3rem; margin-top: -1.5rem;">
   <h1 style="font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); margin-bottom: 0.5rem;">Compare os modelos</h1>
   <p style="font-size: 1.25rem; color: var(--color-text-secondary); margin-top: 0;">Selecione até 3 motocicletas para comparar especificações e compatibilidade lado a lado.</p>
 </div>
@@ -208,8 +272,8 @@
     </div>
   </div>
 
-  <!-- COMPARISON COLUMNS GRID -->
-  <div id="comparison-columns" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative;">
+  <!-- COMPARISON ROWS CONTAINER -->
+  <div id="comparison-rows-container">
     <!-- Rendered dynamically by JS -->
   </div>
 
@@ -2006,133 +2070,138 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function updateComparison() {
-    const columnsGrid = document.getElementById("comparison-columns");
-    columnsGrid.innerHTML = "";
+    const container = document.getElementById("comparison-rows-container");
+    container.innerHTML = "";
 
-    for (let i = 0; i < 3; i++) {
-      const selectVal = selects[i].value;
-      const bike = motorcycles.find(b => b.id === selectVal);
-      const colDiv = document.createElement("div");
-      colDiv.style.textAlign = "center";
-      colDiv.style.padding = "1rem";
-      colDiv.style.border = "1px solid var(--color-border)";
-      colDiv.style.borderRadius = "12px";
-      colDiv.style.backgroundColor = "var(--color-bg-secondary)";
-      colDiv.style.boxShadow = "0 4px 12px rgba(0,0,0,0.02)";
+    const selectedBikes = selects.map(sel => motorcycles.find(b => b.id === sel.value) || null);
 
+    // If no bikes are selected at all, show global empty state
+    if (selectedBikes.every(b => b === null)) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 6rem 1rem; color: var(--color-text-secondary); border: 1px dashed var(--color-border); border-radius: 12px; background-color: var(--color-bg-secondary);">
+          <div style="font-size: 3.5rem; margin-bottom: 1rem;">⚖️</div>
+          <h3 style="font-weight: 700; font-size: 1.5rem; margin: 0 0 0.5rem 0; color: var(--color-text-primary);">Nenhum modelo comparado</h3>
+          <p style="margin: 0; color: var(--color-text-secondary);">Selecione até três motocicletas nos campos acima para ver o comparativo de especificações.</p>
+        </div>
+      `;
+      return;
+    }
+
+    // Helper to generate a cell content or empty template
+    function getCellHTML(bike, renderCallback) {
       if (!bike) {
-        // Empty State
-        colDiv.innerHTML = `
-          <div style="padding: 6rem 1rem; color: var(--color-text-secondary);">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">⚖️</div>
-            <p style="font-weight: 500;">Selecione uma moto acima para iniciar o comparativo.</p>
-          </div>
-        `;
-      } else {
+        return `<div class="compare-cell empty-cell">—</div>`;
+      }
+      return `<div class="compare-cell">${renderCallback(bike)}</div>`;
+    }
+
+    // 1. Header Row (Brand, Model, Price, Year)
+    let headerRowHTML = '<div class="compare-row">';
+    selectedBikes.forEach(bike => {
+      headerRowHTML += getCellHTML(bike, b => {
         const formattedPrice = new Intl.NumberFormat('pt-BR', {
           style: 'currency',
           currency: 'BRL',
           maximumFractionDigits: 0
-        }).format(bike.fipe_price_brl);
-
-        colDiv.innerHTML = `
-          <!-- CARD HEADER & PRICING -->
-          <div style="margin-bottom: 2rem;">
-            <div style="font-size: 0.9rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
-              ${bike.brand}
-            </div>
-            <h3 style="font-size: 1.75rem; font-weight: 800; color: var(--color-text-primary); margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">
-              ${bike.model}
-            </h3>
-            <div style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.25rem;">
-              ${formattedPrice}
-            </div>
-            <div style="font-size: 0.85rem; color: var(--color-text-secondary); font-weight: 500;">
-              Ano/Modelo: ${bike.is_used ? bike.year + ' (Seminova)' : 'Zero Km (Atual)'}
-            </div>
+        }).format(b.fipe_price_brl);
+        return `
+          <div style="font-size: 0.9rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+            ${b.brand}
           </div>
-
-          <!-- COMPARISON METRICS SECTION -->
-          <div style="display: flex; flex-direction: column; gap: 2rem; border-top: 1px solid var(--color-border); padding-top: 2rem;">
-            
-            <!-- Metric: Seat Height -->
-            <div>
-              <div style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); line-height: 1.1;">
-                ${bike.seat_height_mm} mm
-              </div>
-              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
-                Altura do Assento (Perfil: ${bike.seat_width_profile})
-              </div>
-            </div>
-
-            <!-- Metric: Wet Weight -->
-            <div>
-              <div style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); line-height: 1.1;">
-                ${bike.wet_weight_kg} kg
-              </div>
-              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
-                Peso em Ordem de Marcha
-              </div>
-            </div>
-
-            <!-- Metric: Power -->
-            <div>
-              <div style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); line-height: 1.1;">
-                ${bike.power_hp > 0 ? bike.power_hp + ' cv' : 'N/A'}
-              </div>
-              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
-                Potência Máxima
-              </div>
-            </div>
-
-            <!-- Metric: Engine CC -->
-            <div>
-              <div style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); line-height: 1.1;">
-                ${bike.engine_cc > 0 ? Math.round(bike.engine_cc) + ' cc' : 'Elétrica'}
-              </div>
-              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
-                Cilindrada / Motorização
-              </div>
-            </div>
-
-            <!-- Detail Group: Safety -->
-            <div style="border-top: 1px solid var(--color-border); padding-top: 1.5rem;">
-              <div style="font-size: 1.1rem; font-weight: 700; color: var(--color-text-primary);">
-                ${bike.has_abs ? 'Freios ABS de Série' : (bike.has_cbs ? 'Freios Combinados (CBS)' : 'Freios a Disco Simples')}
-              </div>
-              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
-                Sistema de Segurança de Frenagem
-              </div>
-            </div>
-
-            <!-- Detail Group: Maintenance -->
-            <div>
-              <div style="font-size: 1.1rem; font-weight: 700; color: var(--color-text-primary);">
-                Custo ${getMaintenanceLabel(bike.maintenance_index)}
-              </div>
-              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
-                Índice de Custo de Manutenção
-              </div>
-            </div>
-
-            <!-- Detail Group: Theft Risk -->
-            <div>
-              <div style="font-size: 1.1rem; font-weight: 700; color: var(--color-text-primary);">
-                Risco ${getTheftRiskLabel(bike.theft_risk_index)}
-              </div>
-              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
-                Índice de Roubo / Custo de Seguro
-              </div>
-            </div>
-
+          <h3 style="font-size: 1.75rem; font-weight: 800; color: var(--color-text-primary); margin: 0 0 0.5rem 0; letter-spacing: -0.02em; min-height: 4.2rem; display: flex; align-items: center; justify-content: center;">
+            ${b.model}
+          </h3>
+          <div style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.25rem;">
+            ${formattedPrice}
+          </div>
+          <div style="font-size: 0.85rem; color: var(--color-text-secondary); font-weight: 500;">
+            ${b.is_used ? b.year + ' (Seminova)' : 'Zero Km (Atual)'}
           </div>
         `;
-      }
-      columnsGrid.appendChild(colDiv);
-    }
+      });
+    });
+    headerRowHTML += '</div>';
+    container.innerHTML += headerRowHTML;
+
+    // 2. Seat Height Row
+    let seatRowHTML = '<div class="compare-row">';
+    selectedBikes.forEach(bike => {
+      seatRowHTML += getCellHTML(bike, b => `
+        <div class="big-metric">${b.seat_height_mm} mm</div>
+        <div class="metric-label">Altura do Assento (Perfil: ${b.seat_width_profile})</div>
+      `);
+    });
+    seatRowHTML += '</div>';
+    container.innerHTML += seatRowHTML;
+
+    // 3. Wet Weight Row
+    let weightRowHTML = '<div class="compare-row">';
+    selectedBikes.forEach(bike => {
+      weightRowHTML += getCellHTML(bike, b => `
+        <div class="big-metric">${b.wet_weight_kg} kg</div>
+        <div class="metric-label">Peso em Ordem de Marcha</div>
+      `);
+    });
+    weightRowHTML += '</div>';
+    container.innerHTML += weightRowHTML;
+
+    // 4. Power Row
+    let powerRowHTML = '<div class="compare-row">';
+    selectedBikes.forEach(bike => {
+      powerRowHTML += getCellHTML(bike, b => `
+        <div class="big-metric">${b.power_hp > 0 ? b.power_hp + ' cv' : 'N/A'}</div>
+        <div class="metric-label">Potência Máxima</div>
+      `);
+    });
+    powerRowHTML += '</div>';
+    container.innerHTML += powerRowHTML;
+
+    // 5. Engine CC Row
+    let ccRowHTML = '<div class="compare-row">';
+    selectedBikes.forEach(bike => {
+      ccRowHTML += getCellHTML(bike, b => `
+        <div class="big-metric">${b.engine_cc > 0 ? Math.round(b.engine_cc) + ' cc' : 'Elétrica'}</div>
+        <div class="metric-label">Cilindrada / Motorização</div>
+      `);
+    });
+    ccRowHTML += '</div>';
+    container.innerHTML += ccRowHTML;
+
+    // 6. Safety Row
+    let safetyRowHTML = '<div class="compare-row">';
+    selectedBikes.forEach(bike => {
+      safetyRowHTML += getCellHTML(bike, b => `
+        <div class="text-spec">${b.has_abs ? 'Freios ABS' : (b.has_cbs ? 'Freios Combinados (CBS)' : 'Freios a Disco')}</div>
+        <div class="metric-label">Sistema de Freios / Segurança</div>
+      `);
+    });
+    safetyRowHTML += '</div>';
+    container.innerHTML += safetyRowHTML;
+
+    // 7. Maintenance Row
+    let maintRowHTML = '<div class="compare-row">';
+    selectedBikes.forEach(bike => {
+      maintRowHTML += getCellHTML(bike, b => `
+        <div class="text-spec">${getMaintenanceLabel(b.maintenance_index)}</div>
+        <div class="metric-label">Manutenção & Peças</div>
+      `);
+    });
+    maintRowHTML += '</div>';
+    container.innerHTML += maintRowHTML;
+
+    // 8. Theft Risk Row
+    let theftRowHTML = '<div class="compare-row">';
+    selectedBikes.forEach(bike => {
+      theftRowHTML += getCellHTML(bike, b => `
+        <div class="text-spec">${getTheftRiskLabel(b.theft_risk_index)}</div>
+        <div class="metric-label">Risco de Roubo & Seguro</div>
+      `);
+    });
+    theftRowHTML += '</div>';
+    container.innerHTML += theftRowHTML;
   }
 
-  // Initial load showing placeholders
+  // Initial load
   updateComparison();
 });
 </script>
