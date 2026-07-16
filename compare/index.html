@@ -212,6 +212,19 @@
     padding-bottom: 2rem;
   }
 
+  .compare-row.sticky-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: var(--color-bg-primary);
+    z-index: 10;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    border-bottom: 2px solid var(--color-border);
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
   .selectors-grid {
     display: grid;
     grid-template-columns: repeat(var(--cols-count, 2), 1fr);
@@ -219,6 +232,39 @@
     margin-bottom: 3.5rem;
     border-bottom: 1px solid var(--color-border);
     padding-bottom: 2.5rem;
+  }
+
+  .year-tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 6px;
+    width: 100%;
+  }
+
+  .year-tag {
+    padding: 6px 12px;
+    border-radius: 16px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+
+  .year-tag:hover {
+    background-color: var(--color-border);
+    color: var(--color-text-primary);
+  }
+
+  .year-tag.active {
+    background-color: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
   }
 
   .compare-cell {
@@ -503,9 +549,9 @@
           <div id="dropdown-menu-0" class="dropdown-menu-list" style="display: none;"></div>
           
           <!-- Year Selector -->
-          <div id="year-container-0" style="margin-top: 12px; display: none; align-items: center; justify-content: center; gap: 8px;">
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-secondary);">Ano:</span>
-            <select id="year-select-0" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 700; cursor: pointer; outline: none;"></select>
+          <div id="year-container-0" style="margin-top: 12px; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Selecione o Ano</span>
+            <div id="year-tags-0" class="year-tags-wrapper"></div>
           </div>
         </div>
         
@@ -518,9 +564,9 @@
           <div id="dropdown-menu-1" class="dropdown-menu-list" style="display: none;"></div>
           
           <!-- Year Selector -->
-          <div id="year-container-1" style="margin-top: 12px; display: none; align-items: center; justify-content: center; gap: 8px;">
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-secondary);">Ano:</span>
-            <select id="year-select-1" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 700; cursor: pointer; outline: none;"></select>
+          <div id="year-container-1" style="margin-top: 12px; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Selecione o Ano</span>
+            <div id="year-tags-1" class="year-tags-wrapper"></div>
           </div>
         </div>
         
@@ -533,9 +579,9 @@
           <div id="dropdown-menu-2" class="dropdown-menu-list" style="display: none;"></div>
           
           <!-- Year Selector -->
-          <div id="year-container-2" style="margin-top: 12px; display: none; align-items: center; justify-content: center; gap: 8px;">
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-secondary);">Ano:</span>
-            <select id="year-select-2" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 700; cursor: pointer; outline: none;"></select>
+          <div id="year-container-2" style="margin-top: 12px; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Selecione o Ano</span>
+            <div id="year-tags-2" class="year-tags-wrapper"></div>
           </div>
         </div>
 
@@ -548,9 +594,9 @@
           <div id="dropdown-menu-3" class="dropdown-menu-list" style="display: none;"></div>
           
           <!-- Year Selector -->
-          <div id="year-container-3" style="margin-top: 12px; display: none; align-items: center; justify-content: center; gap: 8px;">
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-secondary);">Ano:</span>
-            <select id="year-select-3" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 700; cursor: pointer; outline: none;"></select>
+          <div id="year-container-3" style="margin-top: 12px; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Selecione o Ano</span>
+            <div id="year-tags-3" class="year-tags-wrapper"></div>
           </div>
         </div>
 
@@ -29634,7 +29680,7 @@ document.addEventListener("DOMContentLoaded", function() {
     clearBtn: document.getElementById(`clear-btn-${i}`),
     dropdown: document.getElementById(`dropdown-menu-${i}`),
     yearContainer: document.getElementById(`year-container-${i}`),
-    yearSelect: document.getElementById(`year-select-${i}`)
+    yearTags: document.getElementById(`year-tags-${i}`)
   }));
 
   // Keyboard navigation state per column
@@ -29698,13 +29744,6 @@ document.addEventListener("DOMContentLoaded", function() {
       col.dropdown.style.display = "none";
     });
 
-    // Year selection triggers updates
-    col.yearSelect.addEventListener("change", () => {
-      const selectedId = col.yearSelect.value;
-      const variant = motorcycles.find(b => b.id === selectedId);
-      activeSelections[index] = variant || null;
-      updateComparison();
-    });
   });
 
   // Listen for filter changes and re-render open dropdowns
@@ -29774,15 +29813,26 @@ document.addEventListener("DOMContentLoaded", function() {
         const variations = motorcycles.filter(b => b.brand === bike.brand && b.model === bike.model);
         variations.sort((a, b) => b.year - a.year);
         
-        col.yearSelect.innerHTML = "";
+        col.yearTags.innerHTML = "";
         variations.forEach(v => {
-          const opt = document.createElement("option");
-          opt.value = v.id;
-          opt.textContent = v.is_used ? `${v.year} (Usada)` : `${v.year} (Zero Km)`;
-          col.yearSelect.appendChild(opt);
+          const tag = document.createElement("div");
+          tag.className = "year-tag";
+          tag.textContent = v.year;
+          tag.dataset.id = v.id;
+          
+          tag.addEventListener("click", () => {
+            Array.from(col.yearTags.children).forEach(t => t.classList.remove("active"));
+            tag.classList.add("active");
+            activeSelections[idx] = v;
+            updateComparison();
+          });
+          
+          if (v.id === bike.id) {
+            tag.classList.add("active");
+          }
+          col.yearTags.appendChild(tag);
         });
         
-        col.yearSelect.value = bike.id;
         col.yearContainer.style.display = "flex";
       }
     });
@@ -29945,18 +29995,26 @@ document.addEventListener("DOMContentLoaded", function() {
     variations.sort((a, b) => b.year - a.year);
 
     if (variations.length > 0) {
-      // Clear previous year options
-      col.yearSelect.innerHTML = "";
+      col.yearTags.innerHTML = "";
       
       variations.forEach(v => {
-        const opt = document.createElement("option");
-        opt.value = v.id;
-        opt.textContent = v.is_used ? `${v.year} (Usada)` : `${v.year} (Zero Km)`;
-        col.yearSelect.appendChild(opt);
+        const tag = document.createElement("div");
+        tag.className = "year-tag";
+        tag.textContent = v.year;
+        tag.dataset.id = v.id;
+        
+        tag.addEventListener("click", () => {
+          Array.from(col.yearTags.children).forEach(t => t.classList.remove("active"));
+          tag.classList.add("active");
+          activeSelections[colIdx] = v;
+          updateComparison();
+        });
+        
+        col.yearTags.appendChild(tag);
       });
 
       // Default selection to the latest year (first item in descending array)
-      col.yearSelect.value = variations[0].id;
+      col.yearTags.children[0].classList.add("active");
       col.yearContainer.style.display = "flex";
       activeSelections[colIdx] = variations[0];
     } else {
@@ -30028,8 +30086,20 @@ document.addEventListener("DOMContentLoaded", function() {
       return `<div class="compare-cell">${renderCallback(bike)}</div>`;
     }
 
-    // 1. Header Row (Brand, Model, Price, Year)
-    let headerRowHTML = '<div class="compare-row">';
+    // 1a. Image Row (Motorcycle Images - Non-sticky)
+    let imageRowHTML = '<div class="compare-row" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">';
+    activeSelections.forEach(bike => {
+      imageRowHTML += getCellHTML(bike, b => `
+        <div style="width: 100%; height: 260px; display: flex; align-items: center; justify-content: center; overflow: visible; padding: 0 8px;">
+          <img src="${b.image_path || (SITE_BASEURL + '/assets/images/generated/cg_160.png')}" alt="${b.model}" class="compare-bike-img">
+        </div>
+      `);
+    });
+    imageRowHTML += '</div>';
+    container.innerHTML += imageRowHTML;
+
+    // 1b. Details Header Row (Brand, Model, Price, Year - Sticky Header)
+    let headerRowHTML = '<div class="compare-row sticky-header">';
     activeSelections.forEach(bike => {
       headerRowHTML += getCellHTML(bike, b => {
         const formattedPrice = new Intl.NumberFormat('pt-BR', {
@@ -30038,19 +30108,16 @@ document.addEventListener("DOMContentLoaded", function() {
           maximumFractionDigits: 0
         }).format(b.fipe_price_brl);
         return `
-          <div style="width: 100%; height: 260px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; overflow: visible; padding: 0 8px;">
-            <img src="${b.image_path || (SITE_BASEURL + '/assets/images/generated/cg_160.png')}" alt="${b.model}" class="compare-bike-img">
-          </div>
-          <div style="font-size: 0.9rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
             ${b.brand}
           </div>
-          <h3 style="font-size: 1.6rem; font-weight: 800; color: var(--color-text-primary); margin: 0 0 0.5rem 0; letter-spacing: -0.02em; min-height: 3.6rem; display: flex; align-items: center; justify-content: center; line-height: 1.2;">
+          <h3 style="font-size: 1.40rem; font-weight: 800; color: var(--color-text-primary); margin: 0 0 0.5rem 0; letter-spacing: -0.02em; min-height: 2.8rem; display: flex; align-items: center; justify-content: center; line-height: 1.2;">
             ${b.model}
           </h3>
-          <div style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.25rem;">
+          <div style="font-size: 1.20rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.25rem;">
             ${formattedPrice}
           </div>
-          <div style="font-size: 0.85rem; color: var(--color-text-secondary); font-weight: 500;">
+          <div style="font-size: 0.80rem; color: var(--color-text-secondary); font-weight: 600;">
             ${b.is_used ? b.year + ' (Seminova)' : 'Zero Km (Atual)'}
           </div>
         `;
