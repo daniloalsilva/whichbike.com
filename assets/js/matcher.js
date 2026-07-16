@@ -121,13 +121,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const location = document.querySelector("input[name='location']:checked").value;
     const maxBudget = parseFloat(document.getElementById("max-budget").value);
     const strictBudget = document.getElementById("strict-budget").checked;
+    const condition = document.querySelector("input[name='bike-condition']:checked").value;
 
     // Load static database seeded from Jekyll
     const dataElement = document.getElementById("motorcycles-json");
     if (!dataElement) return;
-    const motorcycles = JSON.parse(dataElement.textContent);
+    let motorcycles = JSON.parse(dataElement.textContent);
 
-    const scoredBikes = motorcycles.map(bike => {
+    // Filter by conservation state
+    if (condition === "new") {
+      motorcycles = motorcycles.filter(b => b.is_used !== true);
+    } else if (condition === "used") {
+      motorcycles = motorcycles.filter(b => b.is_used === true);
+    }
+
+    let scoredBikes = motorcycles.map(bike => {
       let scores = {
         ergonomics: 100,
         safety: 100,
@@ -326,7 +334,12 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="result-card-header">
           <div>
             <div class="bike-brand">${bike.brand}</div>
-            <div class="bike-model">${bike.model}</div>
+            <div class="bike-model">
+              ${bike.model}
+              <small style="font-size: 0.85rem; color: #a1a9bb; font-weight: normal; margin-left: 5px;">
+                (${bike.is_used ? bike.year : 'Zero Km'})
+              </small>
+            </div>
           </div>
           <span class="match-percentage-badge" style="${badgeStyle}">${score}% Match</span>
         </div>
