@@ -31,6 +31,18 @@ document.addEventListener("DOMContentLoaded", function () {
     valInseam.textContent = inseamSlider.value;
   });
 
+  const budgetSlider = document.getElementById("max-budget");
+  const valBudget = document.getElementById("val-budget");
+
+  budgetSlider.addEventListener("input", function () {
+    const formatted = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      maximumFractionDigits: 0
+    }).format(budgetSlider.value);
+    valBudget.textContent = formatted;
+  });
+
   // --- Interactive Radio Cards ---
   const radioLabels = document.querySelectorAll(".radio-card");
   radioLabels.forEach(label => {
@@ -107,6 +119,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const preferLightweight = document.getElementById("prefer-lightweight").checked;
     const roadType = document.querySelector("input[name='road-type']:checked").value;
     const location = document.querySelector("input[name='location']:checked").value;
+    const maxBudget = parseFloat(document.getElementById("max-budget").value);
+    const strictBudget = document.getElementById("strict-budget").checked;
 
     // Load static database seeded from Jekyll
     const dataElement = document.getElementById("motorcycles-json");
@@ -246,6 +260,17 @@ document.addEventListener("DOMContentLoaded", function () {
         scores.environment * 0.20
       );
 
+      // Budget logic
+      let isOverBudget = false;
+      if (bike.fipe_price_brl > maxBudget) {
+        isOverBudget = true;
+        if (!strictBudget) {
+          compositeScore = Math.max(0, compositeScore - 25);
+          const formattedFipe = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(bike.fipe_price_brl);
+          warnings.push(`Excede o orçamento máximo (FIPE: ${formattedFipe}).`);
+        }
+      }
+
       // Clamp score
       compositeScore = Math.max(0, Math.min(100, compositeScore));
 
@@ -253,9 +278,15 @@ document.addEventListener("DOMContentLoaded", function () {
         bike,
         score: compositeScore,
         warnings,
-        details
+        details,
+        isOverBudget
       };
     });
+
+    // Filter out strictly over budget if selected
+    if (strictBudget) {
+      scoredBikes = scoredBikes.filter(item => !item.isOverBudget);
+    }
 
     // Sort by compatibility descending
     scoredBikes.sort((a, b) => b.score - a.score);

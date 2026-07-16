@@ -306,6 +306,16 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label for="max-budget">Qual o seu orçamento máximo? <span id="val-budget" class="val-display">R$ 40.000</span></label>
+          <div class="input-desc">Média de valor de tabela FIPE recomendada.</div>
+          <input type="range" id="max-budget" name="max-budget" min="10000" max="80000" step="1000" value="40000" class="slider-input">
+          <label class="checkbox-container">
+            <input type="checkbox" id="strict-budget" name="strict-budget">
+            <span class="checkbox-label">Ocultar motos que excedem meu orçamento</span>
+          </label>
+        </div>
+
         <div class="step-actions">
           <button type="button" id="btn-back-3" class="btn-secondary">← Voltar</button>
           <button type="button" id="btn-submit" class="btn-success">Encontrar Minha Moto Perfeita 🏍️</button>
