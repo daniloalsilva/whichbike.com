@@ -15,22 +15,19 @@
 <meta charset="utf-8">
 
 
-<!-- begin _includes/seo.html --><title>WhichBike 🏍️ | Encontre a Moto Perfeita Para Você</title>
-<meta name="description" content="O matcher de moto personalizado para o mercado brasileiro. Compare ergonomia, potência, segurança, peso e custos baseado no seu perfil físico e experiência.">
+<!-- begin _includes/seo.html --><title>Comparar Modelos | WhichBike ⚖️ - WhichBike 🏍️</title>
+<meta name="description" content="Compare as especificações técnicas, altura do assento, peso, e preço FIPE de até 3 motos lado a lado no estilo Apple.">
 
 
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="WhichBike 🏍️">
-<meta property="og:title" content="WhichBike 🏍️ | Encontre a Moto Perfeita Para Você">
-<meta property="og:url" content="/whichbike.com/">
+<meta property="og:title" content="Comparar Modelos | WhichBike ⚖️">
+<meta property="og:url" content="/whichbike.com/compare/">
 
 
-  <meta property="og:description" content="O matcher de moto personalizado para o mercado brasileiro. Compare ergonomia, potência, segurança, peso e custos baseado no seu perfil físico e experiência.">
-
-
-
+  <meta property="og:description" content="Compare as especificações técnicas, altura do assento, peso, e preço FIPE de até 3 motos lado a lado no estilo Apple.">
 
 
 
@@ -42,20 +39,13 @@
 
 
 
-<link rel="canonical" href="/whichbike.com/">
 
 
 
+<link rel="canonical" href="/whichbike.com/compare/">
 
 
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-    "name": null,
-    "url": "/whichbike.com/"
-}
-</script>
+
 
 
 
@@ -162,8 +152,8 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="WhichBike 🏍️ | Encontre a Moto Perfeita Para Você">
-    
+    <meta itemprop="headline" content="Comparar Modelos | WhichBike ⚖️">
+    <meta itemprop="description" content="Compare as especificações técnicas, altura do assento, peso, e preço FIPE de até 3 motos lado a lado no estilo Apple.">
     
     
 
@@ -171,11 +161,11 @@
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="/whichbike.com/" itemprop="url"><table>
+            <a href="/whichbike.com/compare/" itemprop="url"><table>
   <tbody>
     <tr>
-      <td>WhichBike 🏍️</td>
-      <td>Encontre a Moto Perfeita Para Você</td>
+      <td>Comparar Modelos</td>
+      <td>WhichBike ⚖️</td>
     </tr>
   </tbody>
 </table>
@@ -190,191 +180,42 @@
 
       <section class="page__content e-content" itemprop="text">
         
-        <section class="hero-section" style="background-image: url('/whichbike.com/assets/images/generated/hero_matcher.png'); background-size: cover; background-position: center;">
-  <div class="hero-bg-overlay"></div>
-  <div class="hero-content-wrapper">
-    <h1 id="main-title" class="hero-main-title">Descubra a motocicleta ideal para a sua <span class="accent-text">estatura e experiência</span></h1>
-    <p class="hero-desc">Nosso algoritmo inteligente combina sua altura, entrepernas, experiência e condições de vias para recomendar a moto perfeita para você no mercado brasileiro.</p>
-  </div>
-</section>
-
-<div class="app-container">
-  <div class="quiz-card">
-    <div class="quiz-header">
-      <div class="step-indicator">
-        <span class="step-badge active" id="badge-step-1">1</span>
-        <span class="step-line"></span>
-        <span class="step-badge" id="badge-step-2">2</span>
-        <span class="step-line"></span>
-        <span class="step-badge" id="badge-step-3">3</span>
-      </div>
-      <h2 id="step-title" class="step-title-text">Passo 1: Suas Dimensões Físicas (Ergonomia)</h2>
-    </div>
-
-    <form id="matcher-form" onsubmit="return false;">
-      <!-- STEP 1: ERGONOMICS -->
-      <div class="quiz-step" id="quiz-step-1">
-        <p class="step-instructions">O encaixe físico é o fator mais importante para a segurança. Informe sua altura e altura do entrepernas para calcularmos o alcance dos pés ao solo.</p>
-        
-        <div class="form-group">
-          <label for="rider-height">Sua Altura (cm): <span id="val-height" class="val-display">175</span> cm</label>
-          <input type="range" id="rider-height" name="rider-height" min="145" max="210" value="175" class="slider-input">
-        </div>
-
-        <div class="form-group">
-          <label for="rider-inseam">Altura do seu Entrepernas (cm): <span id="val-inseam" class="val-display">78</span> cm</label>
-          <div class="input-desc">Medida da sola do pé até a virilha. Fundamental para determinar se você alcançará o chão.</div>
-          <input type="range" id="rider-inseam" name="rider-inseam" min="60" max="100" value="78" class="slider-input">
-          <div class="help-box">
-            <strong>Dica:</strong> Encoste-se na parede e meça com fita métrica da virilha até o chão. Costuma ser cerca de 45% da sua altura.
-          </div>
-        </div>
-
-        <div class="step-actions">
-          <button type="button" id="btn-next-1" class="btn-primary">Avançar para Pilotagem →</button>
-        </div>
-      </div>
-
-      <!-- STEP 2: EXPERIENCE & SAFETY -->
-      <div class="quiz-step hidden" id="quiz-step-2">
-        <p class="step-instructions">Seu nível de habilidade e prioridade de segurança nos ajudam a evitar motos perigosas para o seu perfil.</p>
-
-        <div class="form-group">
-          <label>Nível de Experiência:</label>
-          <div class="radio-cards-grid">
-            <label class="radio-card selected">
-              <input type="radio" name="experience" value="beginner" checked class="radio-hidden">
-              <span class="card-title">Iniciante / Primeira Moto</span>
-              <span class="card-desc">Recém-habilitado ou com pouca prática. Foco em motos leves, fáceis de manobrar e com entrega suave de potência.</span>
-            </label>
-            
-            <label class="radio-card">
-              <input type="radio" name="experience" value="intermediate" class="radio-hidden">
-              <span class="card-title">Intermediário</span>
-              <span class="card-desc">Já pilota há algum tempo ou está subindo de cilindrada. Confortável com pesos e acelerações intermediárias.</span>
-            </label>
-
-            <label class="radio-card">
-              <input type="radio" name="experience" value="expert" class="radio-hidden">
-              <span class="card-title">Experiente</span>
-              <span class="card-desc">Muitos anos de pilotagem. Confortável com motos pesadas, torque agressivo e sem limitadores artificiais.</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Prioridades de Segurança Adicionais:</label>
-          <label class="checkbox-container">
-            <input type="checkbox" id="require-abs" name="require-abs">
-            <span class="checkbox-label">Exigir Freio ABS (Evita bloqueio de rodas na chuva)</span>
-          </label>
-          <label class="checkbox-container">
-            <input type="checkbox" id="prefer-lightweight" name="prefer-lightweight" checked>
-            <span class="checkbox-label">Priorizar moto leve e fácil de levantar se cair (Recomendado para Iniciantes)</span>
-          </label>
-        </div>
-
-        <div class="step-actions">
-          <button type="button" id="btn-back-2" class="btn-secondary">← Voltar</button>
-          <button type="button" id="btn-next-2" class="btn-primary">Avançar para Uso & Localidade →</button>
-        </div>
-      </div>
-
-      <!-- STEP 3: ENVIRONMENT & CONSTRAINTS -->
-      <div class="quiz-step hidden" id="quiz-step-3">
-        <p class="step-instructions">Onde e como você usará sua moto determina a suspensão ideal e os riscos de custos locais.</p>
-
-        <div class="form-group">
-          <label>Condição predominante das vias:</label>
-          <div class="radio-cards-grid">
-            <label class="radio-card selected">
-              <input type="radio" name="road-type" value="smooth" checked class="radio-hidden">
-              <span class="card-title">Asfalto Urbano / Rodovias boas</span>
-              <span class="card-desc">Ideal para scooters, nakeds e motos de rua tradicionais.</span>
-            </label>
-            
-            <label class="radio-card">
-              <input type="radio" name="road-type" value="rough" class="radio-hidden">
-              <span class="card-title">Vias com buracos / Lombadas / Terra</span>
-              <span class="card-desc">Ideal para motos do tipo "Trail" (suspensão alta e curso longo para absorver impactos).</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Sua localidade habitual:</label>
-          <div class="radio-cards-grid">
-            <label class="radio-card selected">
-              <input type="radio" name="location" value="capital" checked class="radio-hidden">
-              <span class="card-title">Grandes Capitais / Regiões Metropolitanas</span>
-              <span class="card-desc">Foco na agilidade para trânsito (corredor) e alerta para índice de roubo (seguro mais caro).</span>
-            </label>
-            
-            <label class="radio-card">
-              <input type="radio" name="location" value="interior" class="radio-hidden">
-              <span class="card-title">Cidades do Interior / Áreas Rurais</span>
-              <span class="card-desc">Foco em facilidade de encontrar peças de reposição locais e mecânicos confiáveis.</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Preferência de estado de conservação:</label>
-          <div class="radio-cards-grid">
-            <label class="radio-card selected">
-              <input type="radio" name="bike-condition" value="all" checked class="radio-hidden">
-              <span class="card-title">Novas & Usadas (Todos)</span>
-              <span class="card-desc">Mostra todas as motos compatíveis no mercado brasileiro.</span>
-            </label>
-            <label class="radio-card">
-              <input type="radio" name="bike-condition" value="new" class="radio-hidden">
-              <span class="card-title">Apenas Zero Km (Novas)</span>
-              <span class="card-desc">Filtra apenas modelos em linha de produção atual.</span>
-            </label>
-            <label class="radio-card">
-              <input type="radio" name="bike-condition" value="used" class="radio-hidden">
-              <span class="card-title">Apenas Usadas (Seminovas)</span>
-              <span class="card-desc">Filtra modelos fora de linha ou com histórico de uso.</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="max-budget">Qual o seu orçamento máximo? <span id="val-budget" class="val-display">R$ 40.000</span></label>
-          <div class="input-desc">Média de valor de tabela FIPE recomendada.</div>
-          <input type="range" id="max-budget" name="max-budget" min="10000" max="80000" step="1000" value="40000" class="slider-input">
-          <label class="checkbox-container">
-            <input type="checkbox" id="strict-budget" name="strict-budget">
-            <span class="checkbox-label">Ocultar motos que excedem meu orçamento</span>
-          </label>
-        </div>
-
-        <div class="step-actions">
-          <button type="button" id="btn-back-3" class="btn-secondary">← Voltar</button>
-          <button type="button" id="btn-submit" class="btn-success">Encontrar Minha Moto Perfeita 🏍️</button>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <!-- RESULTS LAYOUT -->
-  <div class="results-section hidden" id="results-wrapper">
-    <div class="results-header">
-      <h2>Suas Melhores Opções</h2>
-      <p>Nosso algoritmo avaliou peso, alcance dos pés, suspensão e custos locais com base nos seus dados.</p>
-    </div>
-    
-    <div id="results-list" class="results-grid">
-      <!-- Generated dynamically by JS -->
-    </div>
-
-    <div class="results-actions">
-      <button type="button" id="btn-reset" class="btn-secondary">Refazer Teste</button>
-    </div>
-  </div>
+        <div class="compare-header" style="text-align: center; margin-bottom: 3rem; margin-top: -1.5rem;">
+  <h1 style="font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); margin-bottom: 0.5rem;">Compare os modelos</h1>
+  <p style="font-size: 1.25rem; color: var(--color-text-secondary); margin-top: 0;">Selecione até 3 motocicletas para comparar especificações e compatibilidade lado a lado.</p>
 </div>
 
-<!-- PRE-LOADED DATA FROM JEKYLL FOR SEO & JS CONSUMPTION -->
+<div class="app-container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+  
+  <!-- SELECTORS GRID -->
+  <div class="selectors-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3rem; border-bottom: 1px solid var(--color-border); padding-bottom: 2rem;">
+    <div class="select-col">
+      <select id="compare-select-1" class="apple-select" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; cursor: pointer; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+        <option value="">Nenhum modelo selecionado</option>
+      </select>
+    </div>
+    
+    <div class="select-col">
+      <select id="compare-select-2" class="apple-select" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; cursor: pointer; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+        <option value="">Nenhum modelo selecionado</option>
+      </select>
+    </div>
+    
+    <div class="select-col">
+      <select id="compare-select-3" class="apple-select" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; cursor: pointer; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+        <option value="">Nenhum modelo selecionado</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- COMPARISON COLUMNS GRID -->
+  <div id="comparison-columns" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative;">
+    <!-- Rendered dynamically by JS -->
+  </div>
+
+</div>
+
+<!-- PRE-LOADED DATA FROM JEKYLL FOR COMPARISON JS -->
 <script id="motorcycles-json" type="application/json">
 [
   
@@ -2093,7 +1934,208 @@
 ]
 </script>
 
-<script src="/whichbike.com/assets/js/matcher.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const jsonElement = document.getElementById("motorcycles-json");
+  if (!jsonElement) return;
+  const motorcycles = JSON.parse(jsonElement.textContent);
+
+  // Populate selectors
+  const selects = [
+    document.getElementById("compare-select-1"),
+    document.getElementById("compare-select-2"),
+    document.getElementById("compare-select-3")
+  ];
+
+  // Group by brand for cleaner option organization
+  const brandsMap = {};
+  motorcycles.forEach(bike => {
+    if (!brandsMap[bike.brand]) {
+      brandsMap[bike.brand] = [];
+    }
+    brandsMap[bike.brand].push(bike);
+  });
+
+  // Sort brand keys alphabetically
+  const sortedBrands = Object.keys(brandsMap).sort();
+
+  selects.forEach(select => {
+    sortedBrands.forEach(brand => {
+      const optGroup = document.createElement("optgroup");
+      optGroup.label = brand;
+      
+      // Sort models by model name and year descending
+      const sortedBikes = brandsMap[brand].sort((a, b) => {
+        if (a.model === b.model) {
+          return b.year - a.year;
+        }
+        return a.model.localeCompare(b.model);
+      });
+
+      sortedBikes.forEach(bike => {
+        const option = document.createElement("option");
+        option.value = bike.id;
+        const conditionLabel = bike.is_used ? `${bike.year}` : "Zero Km";
+        option.textContent = `${bike.model} (${conditionLabel})`;
+        optGroup.appendChild(option);
+      });
+      select.appendChild(optGroup);
+    });
+
+    select.addEventListener("change", updateComparison);
+  });
+
+  function getTheftRiskLabel(risk) {
+    switch(risk) {
+      case 'critical': return 'Crítico (Seguro alto)';
+      case 'high': return 'Alto';
+      case 'medium-high': return 'Médio-Alto';
+      case 'medium': return 'Médio';
+      case 'low-medium': return 'Baixo-Médio';
+      case 'low': return 'Baixo (Seguro barato)';
+      default: return risk;
+    }
+  }
+
+  function getMaintenanceLabel(val) {
+    if (val <= 2) return "Muito Baixo (Simples/Barata)";
+    if (val <= 4) return "Baixo (Acessível)";
+    if (val <= 6) return "Moderado";
+    if (val <= 8) return "Alto (Premium)";
+    return "Muito Alto (Importada/Complexa)";
+  }
+
+  function updateComparison() {
+    const columnsGrid = document.getElementById("comparison-columns");
+    columnsGrid.innerHTML = "";
+
+    for (let i = 0; i < 3; i++) {
+      const selectVal = selects[i].value;
+      const bike = motorcycles.find(b => b.id === selectVal);
+      const colDiv = document.createElement("div");
+      colDiv.style.textAlign = "center";
+      colDiv.style.padding = "1rem";
+      colDiv.style.border = "1px solid var(--color-border)";
+      colDiv.style.borderRadius = "12px";
+      colDiv.style.backgroundColor = "var(--color-bg-secondary)";
+      colDiv.style.boxShadow = "0 4px 12px rgba(0,0,0,0.02)";
+
+      if (!bike) {
+        // Empty State
+        colDiv.innerHTML = `
+          <div style="padding: 6rem 1rem; color: var(--color-text-secondary);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">⚖️</div>
+            <p style="font-weight: 500;">Selecione uma moto acima para iniciar o comparativo.</p>
+          </div>
+        `;
+      } else {
+        const formattedPrice = new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+          maximumFractionDigits: 0
+        }).format(bike.fipe_price_brl);
+
+        colDiv.innerHTML = `
+          <!-- CARD HEADER & PRICING -->
+          <div style="margin-bottom: 2rem;">
+            <div style="font-size: 0.9rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+              ${bike.brand}
+            </div>
+            <h3 style="font-size: 1.75rem; font-weight: 800; color: var(--color-text-primary); margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">
+              ${bike.model}
+            </h3>
+            <div style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.25rem;">
+              ${formattedPrice}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--color-text-secondary); font-weight: 500;">
+              Ano/Modelo: ${bike.is_used ? bike.year + ' (Seminova)' : 'Zero Km (Atual)'}
+            </div>
+          </div>
+
+          <!-- COMPARISON METRICS SECTION -->
+          <div style="display: flex; flex-direction: column; gap: 2rem; border-top: 1px solid var(--color-border); padding-top: 2rem;">
+            
+            <!-- Metric: Seat Height -->
+            <div>
+              <div style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); line-height: 1.1;">
+                ${bike.seat_height_mm} mm
+              </div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
+                Altura do Assento (Perfil: ${bike.seat_width_profile})
+              </div>
+            </div>
+
+            <!-- Metric: Wet Weight -->
+            <div>
+              <div style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); line-height: 1.1;">
+                ${bike.wet_weight_kg} kg
+              </div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
+                Peso em Ordem de Marcha
+              </div>
+            </div>
+
+            <!-- Metric: Power -->
+            <div>
+              <div style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); line-height: 1.1;">
+                ${bike.power_hp > 0 ? bike.power_hp + ' cv' : 'N/A'}
+              </div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
+                Potência Máxima
+              </div>
+            </div>
+
+            <!-- Metric: Engine CC -->
+            <div>
+              <div style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); line-height: 1.1;">
+                ${bike.engine_cc > 0 ? Math.round(bike.engine_cc) + ' cc' : 'Elétrica'}
+              </div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
+                Cilindrada / Motorização
+              </div>
+            </div>
+
+            <!-- Detail Group: Safety -->
+            <div style="border-top: 1px solid var(--color-border); padding-top: 1.5rem;">
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--color-text-primary);">
+                ${bike.has_abs ? 'Freios ABS de Série' : (bike.has_cbs ? 'Freios Combinados (CBS)' : 'Freios a Disco Simples')}
+              </div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
+                Sistema de Segurança de Frenagem
+              </div>
+            </div>
+
+            <!-- Detail Group: Maintenance -->
+            <div>
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--color-text-primary);">
+                Custo ${getMaintenanceLabel(bike.maintenance_index)}
+              </div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
+                Índice de Custo de Manutenção
+              </div>
+            </div>
+
+            <!-- Detail Group: Theft Risk -->
+            <div>
+              <div style="font-size: 1.1rem; font-weight: 700; color: var(--color-text-primary);">
+                Risco ${getTheftRiskLabel(bike.theft_risk_index)}
+              </div>
+              <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-text-secondary); margin-top: 0.25rem; letter-spacing: 0.05em;">
+                Índice de Roubo / Custo de Seguro
+              </div>
+            </div>
+
+          </div>
+        `;
+      }
+      columnsGrid.appendChild(colDiv);
+    }
+  }
+
+  // Initial load showing placeholders
+  updateComparison();
+});
+</script>
 
         
       </section>
