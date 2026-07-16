@@ -242,34 +242,129 @@
     font-weight: 500;
     padding: 2rem 0;
   }
+
+  /* Custom Search Select Dropdown styling */
+  .search-select-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .dropdown-menu-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    margin-top: 6px;
+    text-align: left;
+  }
+
+  .dropdown-opt {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .dropdown-opt:last-child {
+    border-bottom: none;
+  }
+
+  .dropdown-opt:hover {
+    background-color: var(--color-border);
+  }
+
+  .brand-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-right: 8px;
+  }
+
+  .clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: 0 4px;
+    display: none;
+  }
+
+  .clear-btn:hover {
+    color: var(--color-text-primary);
+  }
 </style>
 
 <div class="compare-header" style="text-align: center; margin-bottom: 3rem; margin-top: -1.5rem;">
   <h1 style="font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-text-primary); margin-bottom: 0.5rem;">Compare os modelos</h1>
-  <p style="font-size: 1.25rem; color: var(--color-text-secondary); margin-top: 0;">Selecione até 3 motocicletas para comparar especificações e compatibilidade lado a lado.</p>
+  <p style="font-size: 1.25rem; color: var(--color-text-secondary); margin-top: 0;">Busque e selecione até 3 motocicletas para comparar especificações e compatibilidade lado a lado.</p>
 </div>
 
 <div class="app-container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
   
-  <!-- SELECTORS GRID -->
-  <div class="selectors-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3rem; border-bottom: 1px solid var(--color-border); padding-bottom: 2rem;">
-    <div class="select-col">
-      <select id="compare-select-1" class="apple-select" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; cursor: pointer; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-        <option value="">Nenhum modelo selecionado</option>
-      </select>
+  <!-- SEARCH SELECTORS GRID -->
+  <div class="selectors-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 2.5rem;">
+    
+    <!-- Column 1 -->
+    <div id="col-wrap-0" class="search-select-wrapper">
+      <div style="position: relative;">
+        <input type="text" id="search-input-0" class="apple-search-input" placeholder="Buscar motocicleta (ex: Hornet)..." autocomplete="off" style="width: 100%; padding: 12px 36px 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+        <button id="clear-btn-0" class="clear-btn">&times;</button>
+      </div>
+      <div id="dropdown-menu-0" class="dropdown-menu-list" style="display: none;"></div>
+      
+      <!-- Year Selector -->
+      <div id="year-container-0" style="margin-top: 12px; display: none; align-items: center; justify-content: center; gap: 8px;">
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-secondary);">Ano:</span>
+        <select id="year-select-0" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 700; cursor: pointer; outline: none;"></select>
+      </div>
     </div>
     
-    <div class="select-col">
-      <select id="compare-select-2" class="apple-select" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; cursor: pointer; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-        <option value="">Nenhum modelo selecionado</option>
-      </select>
+    <!-- Column 2 -->
+    <div id="col-wrap-1" class="search-select-wrapper">
+      <div style="position: relative;">
+        <input type="text" id="search-input-1" class="apple-search-input" placeholder="Buscar motocicleta (ex: Lander)..." autocomplete="off" style="width: 100%; padding: 12px 36px 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+        <button id="clear-btn-1" class="clear-btn">&times;</button>
+      </div>
+      <div id="dropdown-menu-1" class="dropdown-menu-list" style="display: none;"></div>
+      
+      <!-- Year Selector -->
+      <div id="year-container-1" style="margin-top: 12px; display: none; align-items: center; justify-content: center; gap: 8px;">
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-secondary);">Ano:</span>
+        <select id="year-select-1" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 700; cursor: pointer; outline: none;"></select>
+      </div>
     </div>
     
-    <div class="select-col">
-      <select id="compare-select-3" class="apple-select" style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; cursor: pointer; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
-        <option value="">Nenhum modelo selecionado</option>
-      </select>
+    <!-- Column 3 -->
+    <div id="col-wrap-2" class="search-select-wrapper">
+      <div style="position: relative;">
+        <input type="text" id="search-input-2" class="apple-search-input" placeholder="Buscar motocicleta (ex: Duke)..." autocomplete="off" style="width: 100%; padding: 12px 36px 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+        <button id="clear-btn-2" class="clear-btn">&times;</button>
+      </div>
+      <div id="dropdown-menu-2" class="dropdown-menu-list" style="display: none;"></div>
+      
+      <!-- Year Selector -->
+      <div id="year-container-2" style="margin-top: 12px; display: none; align-items: center; justify-content: center; gap: 8px;">
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-secondary);">Ano:</span>
+        <select id="year-select-2" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 700; cursor: pointer; outline: none;"></select>
+      </div>
     </div>
+
   </div>
 
   <!-- COMPARISON ROWS CONTAINER -->
@@ -2004,49 +2099,162 @@ document.addEventListener("DOMContentLoaded", function() {
   if (!jsonElement) return;
   const motorcycles = JSON.parse(jsonElement.textContent);
 
-  // Populate selectors
-  const selects = [
-    document.getElementById("compare-select-1"),
-    document.getElementById("compare-select-2"),
-    document.getElementById("compare-select-3")
-  ];
-
-  // Group by brand for cleaner option organization
-  const brandsMap = {};
+  // Group to extract UNIQUE models (model name + brand)
+  const uniqueModels = [];
+  const seenModels = new Set();
   motorcycles.forEach(bike => {
-    if (!brandsMap[bike.brand]) {
-      brandsMap[bike.brand] = [];
+    const key = `${bike.brand}|${bike.model}`;
+    if (!seenModels.has(key)) {
+      seenModels.add(key);
+      uniqueModels.push({
+        brand: bike.brand,
+        model: bike.model
+      });
     }
-    brandsMap[bike.brand].push(bike);
   });
 
-  // Sort brand keys alphabetically
-  const sortedBrands = Object.keys(brandsMap).sort();
+  // Sort unique models alphabetically by brand, then model
+  uniqueModels.sort((a, b) => {
+    if (a.brand === b.brand) {
+      return a.model.localeCompare(b.model);
+    }
+    return a.brand.localeCompare(b.brand);
+  });
 
-  selects.forEach(select => {
-    sortedBrands.forEach(brand => {
-      const optGroup = document.createElement("optgroup");
-      optGroup.label = brand;
-      
-      // Sort models by model name and year descending
-      const sortedBikes = brandsMap[brand].sort((a, b) => {
-        if (a.model === b.model) {
-          return b.year - a.year;
-        }
-        return a.model.localeCompare(b.model);
-      });
+  // Tracks selected flat variations for columns 0, 1, 2
+  const activeSelections = [null, null, null];
 
-      sortedBikes.forEach(bike => {
-        const option = document.createElement("option");
-        option.value = bike.id;
-        const conditionLabel = bike.is_used ? `${bike.year}` : "Zero Km";
-        option.textContent = `${bike.model} (${conditionLabel})`;
-        optGroup.appendChild(option);
-      });
-      select.appendChild(optGroup);
+  // DOM Elements per column
+  const cols = [0, 1, 2].map(i => ({
+    wrap: document.getElementById(`col-wrap-${i}`),
+    input: document.getElementById(`search-input-${i}`),
+    clearBtn: document.getElementById(`clear-btn-${i}`),
+    dropdown: document.getElementById(`dropdown-menu-${i}`),
+    yearContainer: document.getElementById(`year-container-${i}`),
+    yearSelect: document.getElementById(`year-select-${i}`)
+  }));
+
+  // Initializing Event Listeners per column
+  cols.forEach((col, index) => {
+    // Focus / Click opens dropdown and shows full list
+    col.input.addEventListener("focus", () => {
+      closeAllDropdownsExcept(index);
+      renderDropdownOptions(index, col.input.value);
+      col.dropdown.style.display = "block";
     });
 
-    select.addEventListener("change", updateComparison);
+    // Input changes filter list options
+    col.input.addEventListener("input", () => {
+      renderDropdownOptions(index, col.input.value);
+      col.dropdown.style.display = "block";
+      if (col.input.value) {
+        col.clearBtn.style.display = "block";
+      } else {
+        col.clearBtn.style.display = "none";
+      }
+    });
+
+    // Clear button reset
+    col.clearBtn.addEventListener("click", () => {
+      col.input.value = "";
+      col.clearBtn.style.display = "none";
+      activeSelections[index] = null;
+      col.yearContainer.style.display = "none";
+      updateComparison();
+      col.dropdown.style.display = "none";
+    });
+
+    // Year selection triggers updates
+    col.yearSelect.addEventListener("change", () => {
+      const selectedId = col.yearSelect.value;
+      const variant = motorcycles.find(b => b.id === selectedId);
+      activeSelections[index] = variant || null;
+      updateComparison();
+    });
+  });
+
+  // Helper to render filtered list items inside a column dropdown
+  function renderDropdownOptions(colIdx, filterText = "") {
+    const col = cols[colIdx];
+    col.dropdown.innerHTML = "";
+    
+    const term = filterText.toLowerCase().trim();
+    const filtered = uniqueModels.filter(m => 
+      m.model.toLowerCase().includes(term) || 
+      m.brand.toLowerCase().includes(term)
+    );
+
+    if (filtered.length === 0) {
+      col.dropdown.innerHTML = `<div style="padding: 12px 16px; color: var(--color-text-secondary); font-size: 0.9rem;">Nenhuma moto encontrada</div>`;
+      return;
+    }
+
+    filtered.forEach(m => {
+      const opt = document.createElement("div");
+      opt.className = "dropdown-opt";
+      opt.innerHTML = `<span class="brand-tag">${m.brand}</span>${m.model}`;
+      
+      opt.addEventListener("mousedown", (e) => {
+        // Prevent input blur before click processes
+        e.preventDefault();
+        selectModelForColumn(colIdx, m.brand, m.model);
+      });
+      
+      col.dropdown.appendChild(opt);
+    });
+  }
+
+  // Handle click on unique model option
+  function selectModelForColumn(colIdx, brand, model) {
+    const col = cols[colIdx];
+    col.input.value = `${model}`;
+    col.clearBtn.style.display = "block";
+    col.dropdown.style.display = "none";
+
+    // Gather variations for this specific unique model
+    const variations = motorcycles.filter(b => b.brand === brand && b.model === model);
+    
+    // Sort years descending (latest first)
+    variations.sort((a, b) => b.year - a.year);
+
+    if (variations.length > 0) {
+      // Clear previous year options
+      col.yearSelect.innerHTML = "";
+      
+      variations.forEach(v => {
+        const opt = document.createElement("option");
+        opt.value = v.id;
+        opt.textContent = v.is_used ? `${v.year} (Usada)` : `${v.year} (Zero Km)`;
+        col.yearSelect.appendChild(opt);
+      });
+
+      // Default selection to the latest year (first item in descending array)
+      col.yearSelect.value = variations[0].id;
+      col.yearContainer.style.display = "flex";
+      activeSelections[colIdx] = variations[0];
+    } else {
+      col.yearContainer.style.display = "none";
+      activeSelections[colIdx] = null;
+    }
+
+    updateComparison();
+  }
+
+  function closeAllDropdownsExcept(exceptIdx) {
+    cols.forEach((col, idx) => {
+      if (idx !== exceptIdx) {
+        col.dropdown.style.display = "none";
+      }
+    });
+  }
+
+  // Click outside to close dropdown elements
+  document.addEventListener("click", function(e) {
+    cols.forEach((col, idx) => {
+      if (!col.wrap.contains(e.target)) {
+        col.dropdown.style.display = "none";
+      }
+    });
   });
 
   function getTheftRiskLabel(risk) {
@@ -2073,15 +2281,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const container = document.getElementById("comparison-rows-container");
     container.innerHTML = "";
 
-    const selectedBikes = selects.map(sel => motorcycles.find(b => b.id === sel.value) || null);
-
     // If no bikes are selected at all, show global empty state
-    if (selectedBikes.every(b => b === null)) {
+    if (activeSelections.every(b => b === null)) {
       container.innerHTML = `
         <div style="text-align: center; padding: 6rem 1rem; color: var(--color-text-secondary); border: 1px dashed var(--color-border); border-radius: 12px; background-color: var(--color-bg-secondary);">
           <div style="font-size: 3.5rem; margin-bottom: 1rem;">⚖️</div>
           <h3 style="font-weight: 700; font-size: 1.5rem; margin: 0 0 0.5rem 0; color: var(--color-text-primary);">Nenhum modelo comparado</h3>
-          <p style="margin: 0; color: var(--color-text-secondary);">Selecione até três motocicletas nos campos acima para ver o comparativo de especificações.</p>
+          <p style="margin: 0; color: var(--color-text-secondary);">Digite nos campos de busca acima e selecione os modelos para ver o comparativo side-by-side.</p>
         </div>
       `;
       return;
@@ -2097,7 +2303,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 1. Header Row (Brand, Model, Price, Year)
     let headerRowHTML = '<div class="compare-row">';
-    selectedBikes.forEach(bike => {
+    activeSelections.forEach(bike => {
       headerRowHTML += getCellHTML(bike, b => {
         const formattedPrice = new Intl.NumberFormat('pt-BR', {
           style: 'currency',
@@ -2125,7 +2331,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 2. Seat Height Row
     let seatRowHTML = '<div class="compare-row">';
-    selectedBikes.forEach(bike => {
+    activeSelections.forEach(bike => {
       seatRowHTML += getCellHTML(bike, b => `
         <svg style="width: 32px; height: 32px; margin-bottom: 0.75rem; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="2" x2="12" y2="22"></line>
@@ -2142,7 +2348,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 3. Wet Weight Row
     let weightRowHTML = '<div class="compare-row">';
-    selectedBikes.forEach(bike => {
+    activeSelections.forEach(bike => {
       weightRowHTML += getCellHTML(bike, b => `
         <svg style="width: 32px; height: 32px; margin-bottom: 0.75rem; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -2160,7 +2366,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 4. Power Row
     let powerRowHTML = '<div class="compare-row">';
-    selectedBikes.forEach(bike => {
+    activeSelections.forEach(bike => {
       powerRowHTML += getCellHTML(bike, b => `
         <svg style="width: 32px; height: 32px; margin-bottom: 0.75rem; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
@@ -2174,7 +2380,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 5. Engine CC Row
     let ccRowHTML = '<div class="compare-row">';
-    selectedBikes.forEach(bike => {
+    activeSelections.forEach(bike => {
       ccRowHTML += getCellHTML(bike, b => `
         <svg style="width: 32px; height: 32px; margin-bottom: 0.75rem; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"></circle>
@@ -2190,7 +2396,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 6. Safety Row
     let safetyRowHTML = '<div class="compare-row">';
-    selectedBikes.forEach(bike => {
+    activeSelections.forEach(bike => {
       safetyRowHTML += getCellHTML(bike, b => `
         <svg style="width: 32px; height: 32px; margin-bottom: 0.75rem; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -2204,7 +2410,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 7. Maintenance Row
     let maintRowHTML = '<div class="compare-row">';
-    selectedBikes.forEach(bike => {
+    activeSelections.forEach(bike => {
       maintRowHTML += getCellHTML(bike, b => `
         <svg style="width: 32px; height: 32px; margin-bottom: 0.75rem; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
@@ -2218,7 +2424,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 8. Theft Risk Row
     let theftRowHTML = '<div class="compare-row">';
-    selectedBikes.forEach(bike => {
+    activeSelections.forEach(bike => {
       theftRowHTML += getCellHTML(bike, b => `
         <svg style="width: 32px; height: 32px; margin-bottom: 0.75rem; color: var(--color-primary);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
