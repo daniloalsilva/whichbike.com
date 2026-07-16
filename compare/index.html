@@ -299,6 +299,23 @@
     margin-right: 8px;
   }
 
+  .compare-bike-img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.10));
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .compare-bike-img:hover {
+    transform: scale(1.06) translateY(-4px);
+    filter: drop-shadow(0 16px 32px rgba(0,0,0,0.15));
+  }
+
   .clear-btn {
     position: absolute;
     right: 12px;
@@ -2696,8 +2713,8 @@ document.addEventListener("DOMContentLoaded", function() {
           maximumFractionDigits: 0
         }).format(b.fipe_price_brl);
         return `
-          <div style="width: 100%; height: 110px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; overflow: hidden;">
-            <img src="${b.image_path || '/assets/images/generated/cg_160.png'}" alt="${b.model}" style="max-height: 100%; max-width: 100%; object-fit: contain; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.05)); transition: transform 0.3s;" class="compare-bike-img">
+          <div style="width: 100%; height: 260px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; overflow: visible; padding: 0 8px;">
+            <img src="${b.image_path || (SITE_BASEURL + '/assets/images/generated/cg_160.png')}" alt="${b.model}" class="compare-bike-img">
           </div>
           <div style="font-size: 0.9rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
             ${b.brand}
