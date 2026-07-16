@@ -2246,6 +2246,40 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  // Helper to parse query parameters and load selections on page load
+  function loadSelectionsFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const bikesParam = urlParams.get("bikes");
+    if (!bikesParam) return;
+    
+    const ids = bikesParam.split(",");
+    ids.forEach((id, idx) => {
+      if (idx >= 3) return;
+      const bike = motorcycles.find(b => b.id === id);
+      if (bike) {
+        activeSelections[idx] = bike;
+        const col = cols[idx];
+        col.input.value = bike.model;
+        col.clearBtn.style.display = "block";
+        
+        // Populate year dropdown for this specific bike model
+        const variations = motorcycles.filter(b => b.brand === bike.brand && b.model === bike.model);
+        variations.sort((a, b) => b.year - a.year);
+        
+        col.yearSelect.innerHTML = "";
+        variations.forEach(v => {
+          const opt = document.createElement("option");
+          opt.value = v.id;
+          opt.textContent = v.is_used ? `${v.year} (Usada)` : `${v.year} (Zero Km)`;
+          col.yearSelect.appendChild(opt);
+        });
+        
+        col.yearSelect.value = bike.id;
+        col.yearContainer.style.display = "flex";
+      }
+    });
+  }
+
   // Helper to render filtered list items inside a column dropdown
   function renderDropdownOptions(colIdx, filterText = "") {
     const col = cols[colIdx];
@@ -2624,9 +2658,21 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       }
     });
+
+    // Update URL search parameters
+    const selectedIds = activeSelections.map(b => b ? b.id : "");
+    const url = new URL(window.location);
+    const cleanIds = selectedIds.filter(id => id !== "");
+    if (cleanIds.length > 0) {
+      url.searchParams.set("bikes", cleanIds.join(","));
+    } else {
+      url.searchParams.delete("bikes");
+    }
+    window.history.replaceState({}, "", url);
   }
 
-  // Initial load
+  // Initial load from URL search params
+  loadSelectionsFromUrl();
   updateComparison();
 });
 </script>
