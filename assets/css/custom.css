@@ -5297,7 +5297,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(50% 50% at 50% 50%, rgba(0, 242, 254, 0.04) 0%, transparent 100%);
+  background: rgba(10, 13, 22, 0.75); /* Dark screen over image */
   z-index: 1;
 }
 
