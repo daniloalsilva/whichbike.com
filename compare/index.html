@@ -281,8 +281,14 @@
     border-bottom: none;
   }
 
-  .dropdown-opt:hover {
+  .dropdown-opt:hover,
+  .dropdown-opt.active {
     background-color: var(--color-border);
+  }
+
+  .dropdown-opt.active {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
   }
 
   .brand-tag {
@@ -2425,6 +2431,9 @@ document.addEventListener("DOMContentLoaded", function() {
     yearSelect: document.getElementById(`year-select-${i}`)
   }));
 
+  // Keyboard navigation state per column
+  const activeIndex = [-1, -1, -1];
+
   // Initializing Event Listeners per column
   cols.forEach((col, index) => {
     // Focus / Click opens dropdown and shows full list
@@ -2442,6 +2451,34 @@ document.addEventListener("DOMContentLoaded", function() {
         col.clearBtn.style.display = "block";
       } else {
         col.clearBtn.style.display = "none";
+      }
+    });
+
+    // Keyboard navigation: Arrow Up/Down, Enter, Escape
+    col.input.addEventListener("keydown", (e) => {
+      const opts = Array.from(col.dropdown.querySelectorAll(".dropdown-opt"));
+      if (!opts.length) return;
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        activeIndex[index] = Math.min(activeIndex[index] + 1, opts.length - 1);
+        highlightOption(col, opts, activeIndex[index]);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        activeIndex[index] = Math.max(activeIndex[index] - 1, 0);
+        highlightOption(col, opts, activeIndex[index]);
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        const currentIdx = activeIndex[index];
+        if (currentIdx >= 0 && opts[currentIdx]) {
+          opts[currentIdx].dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
+        } else if (opts.length > 0) {
+          // If nothing is highlighted yet, select first
+          opts[0].dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
+        }
+      } else if (e.key === "Escape") {
+        col.dropdown.style.display = "none";
+        col.input.blur();
       }
     });
 
@@ -2502,6 +2539,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function renderDropdownOptions(colIdx, filterText = "") {
     const col = cols[colIdx];
     col.dropdown.innerHTML = "";
+    activeIndex[colIdx] = -1;
     
     const term = filterText.toLowerCase().trim();
     const filtered = uniqueModels.filter(m => 
@@ -2514,7 +2552,7 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
     }
 
-    filtered.forEach(m => {
+    filtered.forEach((m, i) => {
       const opt = document.createElement("div");
       opt.className = "dropdown-opt";
       opt.innerHTML = `<span class="brand-tag">${m.brand}</span>${m.model}`;
@@ -2524,9 +2562,31 @@ document.addEventListener("DOMContentLoaded", function() {
         e.preventDefault();
         selectModelForColumn(colIdx, m.brand, m.model);
       });
+
+      // Keep keyboard index in sync when mouse hovers
+      opt.addEventListener("mousemove", () => {
+        const opts = Array.from(col.dropdown.querySelectorAll(".dropdown-opt"));
+        activeIndex[colIdx] = opts.indexOf(opt);
+        highlightOption(col, opts, activeIndex[colIdx]);
+      });
       
       col.dropdown.appendChild(opt);
     });
+
+    // Auto-highlight first result when user is typing
+    if (term.length > 0) {
+      const opts = Array.from(col.dropdown.querySelectorAll(".dropdown-opt"));
+      activeIndex[colIdx] = 0;
+      highlightOption(col, opts, 0);
+    }
+  }
+
+  // Apply active highlight to the item at idx, remove from others
+  function highlightOption(col, opts, idx) {
+    opts.forEach((o, i) => o.classList.toggle("active", i === idx));
+    if (opts[idx]) {
+      opts[idx].scrollIntoView({ block: "nearest" });
+    }
   }
 
   // Handle click on unique model option
