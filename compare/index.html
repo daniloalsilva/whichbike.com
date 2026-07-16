@@ -2377,10 +2377,18 @@
 
 <script>
 const chartInstances = [null, null, null];
+const SITE_BASEURL = "/whichbike.com";
 document.addEventListener("DOMContentLoaded", function() {
   const jsonElement = document.getElementById("motorcycles-json");
   if (!jsonElement) return;
   const motorcycles = JSON.parse(jsonElement.textContent);
+
+  // Fix image paths with site baseurl prefix
+  motorcycles.forEach(bike => {
+    if (bike.image_path && !bike.image_path.startsWith("http")) {
+      bike.image_path = SITE_BASEURL + bike.image_path;
+    }
+  });
 
   // Group to extract UNIQUE models (model name + brand)
   const uniqueModels = [];
