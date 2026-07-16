@@ -1,1 +1,1 @@
-Sitemap: /sitemap.xml
+Sitemap: /whichbike.com/sitemap.xml
