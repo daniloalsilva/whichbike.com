@@ -414,6 +414,62 @@
   <div class="compare-table-wrapper">
     <div class="compare-table-content">
       
+      <!-- GLOBAL FILTERS ROW -->
+      <div class="global-filters-row" style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; margin-bottom: 2rem; padding: 1.25rem; background-color: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+        
+        <div class="filter-item" style="display: flex; flex-direction: column; gap: 6px; min-width: 140px; flex: 1;">
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Cilindrada (CC)</label>
+          <select id="filter-cc" style="padding: 8px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-primary); color: var(--color-text-primary); font-weight: 600; cursor: pointer; outline: none; font-size: 0.9rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <option value="all">Todas</option>
+            <option value="low">Até 160cc</option>
+            <option value="mid-low">160cc a 300cc</option>
+            <option value="mid-high">300cc a 600cc</option>
+            <option value="high">Acima de 600cc</option>
+          </select>
+        </div>
+
+        <div class="filter-item" style="display: flex; flex-direction: column; gap: 6px; min-width: 140px; flex: 1;">
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Altura do Assento</label>
+          <select id="filter-seat" style="padding: 8px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-primary); color: var(--color-text-primary); font-weight: 600; cursor: pointer; outline: none; font-size: 0.9rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <option value="all">Todas</option>
+            <option value="low">Baixa (Até 780 mm)</option>
+            <option value="mid">Média (780 a 830 mm)</option>
+            <option value="high">Alta (Acima de 830 mm)</option>
+          </select>
+        </div>
+
+        <div class="filter-item" style="display: flex; flex-direction: column; gap: 6px; min-width: 140px; flex: 1;">
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Vão Livre Solo</label>
+          <select id="filter-ground" style="padding: 8px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-primary); color: var(--color-text-primary); font-weight: 600; cursor: pointer; outline: none; font-size: 0.9rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <option value="all">Todas</option>
+            <option value="low">Baixa (Até 140 mm)</option>
+            <option value="mid">Média (140 a 180 mm)</option>
+            <option value="high">Alta (Acima de 180 mm)</option>
+          </select>
+        </div>
+
+        <div class="filter-item" style="display: flex; flex-direction: column; gap: 6px; min-width: 140px; flex: 1;">
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Manutenção</label>
+          <select id="filter-maintenance" style="padding: 8px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-primary); color: var(--color-text-primary); font-weight: 600; cursor: pointer; outline: none; font-size: 0.9rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <option value="all">Todas</option>
+            <option value="low">Muito Baixa / Baixa</option>
+            <option value="mid">Moderada</option>
+            <option value="high">Alta / Muito Alta</option>
+          </select>
+        </div>
+
+        <div class="filter-item" style="display: flex; flex-direction: column; gap: 6px; min-width: 140px; flex: 1;">
+          <label style="font-size: 0.75rem; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">Seguro / Risco</label>
+          <select id="filter-risk" style="padding: 8px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-primary); color: var(--color-text-primary); font-weight: 600; cursor: pointer; outline: none; font-size: 0.9rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <option value="all">Todos</option>
+            <option value="low">Baixo / Baixo-Médio</option>
+            <option value="mid">Médio / Médio-Alto</option>
+            <option value="high">Alto / Crítico</option>
+          </select>
+        </div>
+
+      </div>
+
       <!-- SEARCH SELECTORS GRID -->
       <div class="selectors-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 2.5rem;">
         
@@ -29613,6 +29669,17 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  // Listen for filter changes and re-render open dropdowns
+  ["filter-cc", "filter-seat", "filter-ground", "filter-maintenance", "filter-risk"].forEach(id => {
+    document.getElementById(id).addEventListener("change", () => {
+      cols.forEach((col, idx) => {
+        if (col.dropdown.style.display === "block") {
+          renderDropdownOptions(idx, col.input.value);
+        }
+      });
+    });
+  });
+
   // Helper to parse query parameters and load selections on page load
   function loadSelectionsFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -29647,6 +29714,96 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
+  // Helper to get filtered unique models based on text search and global filter selectors
+  function getFilteredUniqueModels(filterText = "") {
+    const term = filterText.toLowerCase().trim();
+    const queryWords = term.split(/\s+/).filter(w => w.length > 0);
+    
+    const ccVal = document.getElementById("filter-cc").value;
+    const seatVal = document.getElementById("filter-seat").value;
+    const groundVal = document.getElementById("filter-ground").value;
+    const maintVal = document.getElementById("filter-maintenance").value;
+    const riskVal = document.getElementById("filter-risk").value;
+
+    const filteredBikes = motorcycles.filter(bike => {
+      // 1. Unordered multi-word text filter (matches all words anywhere in brand + model)
+      if (queryWords.length > 0) {
+        const targetText = (bike.brand + " " + bike.model).toLowerCase();
+        const matchesAll = queryWords.every(word => targetText.includes(word));
+        if (!matchesAll) return false;
+      }
+
+      // 2. CC Filter
+      if (ccVal !== "all") {
+        const cc = bike.engine_cc || 0;
+        if (ccVal === "low" && cc > 160) return false;
+        if (ccVal === "mid-low" && (cc <= 160 || cc > 300)) return false;
+        if (ccVal === "mid-high" && (cc <= 300 || cc > 600)) return false;
+        if (ccVal === "high" && cc <= 600) return false;
+      }
+
+      // 3. Seat Height Filter
+      if (seatVal !== "all") {
+        const h = bike.seat_height_mm || 0;
+        if (seatVal === "low" && h > 780) return false;
+        if (seatVal === "mid" && (h <= 780 || h > 830)) return false;
+        if (seatVal === "high" && h <= 830) return false;
+      }
+
+      // 4. Ground Clearance Filter
+      if (groundVal !== "all") {
+        const gc = bike.ground_clearance_mm || 145;
+        if (groundVal === "low" && gc > 140) return false;
+        if (groundVal === "mid" && (gc <= 140 || gc > 180)) return false;
+        if (groundVal === "high" && gc <= 180) return false;
+      }
+
+      // 5. Maintenance Index Filter
+      if (maintVal !== "all") {
+        const m = bike.maintenance_index || 3;
+        if (maintVal === "low" && m > 4) return false;
+        if (maintVal === "mid" && (m <= 4 || m > 6)) return false;
+        if (maintVal === "high" && m <= 6) return false;
+      }
+
+      // 6. Theft Risk Index Filter
+      if (riskVal !== "all") {
+        const r = (bike.theft_risk_index || "").toLowerCase();
+        const isLow = r === "low" || r === "low-medium";
+        const isMid = r === "medium" || r === "medium-high";
+        const isHigh = r === "high" || r === "critical";
+        
+        if (riskVal === "low" && !isLow) return false;
+        if (riskVal === "mid" && !isMid) return false;
+        if (riskVal === "high" && !isHigh) return false;
+      }
+
+      return true;
+    });
+
+    const unique = [];
+    const seen = new Set();
+    filteredBikes.forEach(bike => {
+      const key = `${bike.brand}|${bike.model}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        unique.push({
+          brand: bike.brand,
+          model: bike.model
+        });
+      }
+    });
+
+    unique.sort((a, b) => {
+      if (a.brand === b.brand) {
+        return a.model.localeCompare(b.model);
+      }
+      return a.brand.localeCompare(b.brand);
+    });
+
+    return unique;
+  }
+
   // Helper to render filtered list items inside a column dropdown
   function renderDropdownOptions(colIdx, filterText = "") {
     const col = cols[colIdx];
@@ -29654,10 +29811,7 @@ document.addEventListener("DOMContentLoaded", function() {
     activeIndex[colIdx] = -1;
     
     const term = filterText.toLowerCase().trim();
-    const filtered = uniqueModels.filter(m => 
-      m.model.toLowerCase().includes(term) || 
-      m.brand.toLowerCase().includes(term)
-    );
+    const filtered = getFilteredUniqueModels(filterText);
 
     if (filtered.length === 0) {
       col.dropdown.innerHTML = `<div style="padding: 12px 16px; color: var(--color-text-secondary); font-size: 0.9rem;">Nenhuma moto encontrada</div>`;
