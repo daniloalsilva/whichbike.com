@@ -204,12 +204,21 @@
 
   .compare-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(var(--cols-count, 2), 1fr);
     gap: 2rem;
     width: 100%;
     margin-bottom: 2rem;
     border-bottom: 1px solid var(--color-border);
     padding-bottom: 2rem;
+  }
+
+  .selectors-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--cols-count, 2), 1fr);
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 2.5rem;
   }
 
   .compare-cell {
@@ -470,8 +479,20 @@
 
       </div>
 
+      <!-- COLUMN CONTROLS -->
+      <div class="column-controls" style="display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 1.5rem; margin-top: -0.5rem;">
+        <button id="remove-column-btn" class="apple-btn" style="padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: none; align-items: center; gap: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-secondary); transition: all 0.2s; outline: none;">
+          <svg style="width: 14px; height: 14px; stroke: currentColor;" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Remover Coluna
+        </button>
+        <button id="add-column-btn" class="apple-btn" style="padding: 8px 16px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 6px; border: none; background-color: var(--color-primary); color: #fff; transition: all 0.2s; outline: none;">
+          <svg style="width: 14px; height: 14px; stroke: currentColor;" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Adicionar Coluna
+        </button>
+      </div>
+
       <!-- SEARCH SELECTORS GRID -->
-      <div class="selectors-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 3.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 2.5rem;">
+      <div class="selectors-grid">
         
         <!-- Column 0 -->
         <div id="col-wrap-0" class="search-select-wrapper">
@@ -504,7 +525,7 @@
         </div>
         
         <!-- Column 2 -->
-        <div id="col-wrap-2" class="search-select-wrapper">
+        <div id="col-wrap-2" class="search-select-wrapper" style="display: none;">
           <div style="position: relative;">
             <input type="text" id="search-input-2" class="apple-search-input" placeholder="Buscar motocicleta (ex: Duke)..." autocomplete="off" style="width: 100%; padding: 12px 36px 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
             <button id="clear-btn-2" class="clear-btn">&times;</button>
@@ -515,6 +536,21 @@
           <div id="year-container-2" style="margin-top: 12px; display: none; align-items: center; justify-content: center; gap: 8px;">
             <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-secondary);">Ano:</span>
             <select id="year-select-2" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 700; cursor: pointer; outline: none;"></select>
+          </div>
+        </div>
+
+        <!-- Column 3 -->
+        <div id="col-wrap-3" class="search-select-wrapper" style="display: none;">
+          <div style="position: relative;">
+            <input type="text" id="search-input-3" class="apple-search-input" placeholder="Buscar motocicleta (ex: Tiger)..." autocomplete="off" style="width: 100%; padding: 12px 36px 12px 16px; border-radius: 8px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 600; font-size: 1rem; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+            <button id="clear-btn-3" class="clear-btn">&times;</button>
+          </div>
+          <div id="dropdown-menu-3" class="dropdown-menu-list" style="display: none;"></div>
+          
+          <!-- Year Selector -->
+          <div id="year-container-3" style="margin-top: 12px; display: none; align-items: center; justify-content: center; gap: 8px;">
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-secondary);">Ano:</span>
+            <select id="year-select-3" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-border); background-color: var(--color-bg-secondary); color: var(--color-text-primary); font-weight: 700; cursor: pointer; outline: none;"></select>
           </div>
         </div>
 
@@ -29550,7 +29586,7 @@
 </script>
 
 <script>
-const chartInstances = [null, null, null];
+const chartInstances = [null, null, null, null];
 const SITE_BASEURL = "/whichbike.com";
 document.addEventListener("DOMContentLoaded", function() {
   const jsonElement = document.getElementById("motorcycles-json");
@@ -29586,11 +29622,13 @@ document.addEventListener("DOMContentLoaded", function() {
     return a.brand.localeCompare(b.brand);
   });
 
-  // Tracks selected flat variations for columns 0, 1, 2
-  const activeSelections = [null, null, null];
+  let activeColumnsCount = 2;
 
-  // DOM Elements per column
-  const cols = [0, 1, 2].map(i => ({
+  // Tracks selected flat variations for active columns
+  const activeSelections = [null, null];
+
+  // DOM Elements per column (up to 4)
+  const cols = [0, 1, 2, 3].map(i => ({
     wrap: document.getElementById(`col-wrap-${i}`),
     input: document.getElementById(`search-input-${i}`),
     clearBtn: document.getElementById(`clear-btn-${i}`),
@@ -29600,7 +29638,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }));
 
   // Keyboard navigation state per column
-  const activeIndex = [-1, -1, -1];
+  const activeIndex = [-1, -1, -1, -1];
 
   // Initializing Event Listeners per column
   cols.forEach((col, index) => {
@@ -29680,15 +29718,52 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  // Dynamic columns UI updater
+  function updateColumnUI() {
+    document.querySelector(".compare-table-content").style.setProperty("--cols-count", activeColumnsCount);
+    
+    cols.forEach((col, idx) => {
+      if (idx < activeColumnsCount) {
+        col.wrap.style.display = "block";
+      } else {
+        col.wrap.style.display = "none";
+      }
+    });
+
+    const addBtn = document.getElementById("add-column-btn");
+    const removeBtn = document.getElementById("remove-column-btn");
+
+    if (activeColumnsCount >= 4) {
+      addBtn.style.display = "none";
+    } else {
+      addBtn.style.display = "flex";
+    }
+
+    if (activeColumnsCount <= 2) {
+      removeBtn.style.display = "none";
+    } else {
+      removeBtn.style.display = "flex";
+    }
+  }
+
   // Helper to parse query parameters and load selections on page load
   function loadSelectionsFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     const bikesParam = urlParams.get("bikes");
-    if (!bikesParam) return;
+    if (!bikesParam) {
+      updateColumnUI();
+      return;
+    }
     
     const ids = bikesParam.split(",");
+    activeColumnsCount = Math.max(2, Math.min(ids.length, 4));
+    
+    while (activeSelections.length < activeColumnsCount) {
+      activeSelections.push(null);
+    }
+    
     ids.forEach((id, idx) => {
-      if (idx >= 3) return;
+      if (idx >= 4) return;
       const bike = motorcycles.find(b => b.id === id);
       if (bike) {
         activeSelections[idx] = bike;
@@ -29696,7 +29771,6 @@ document.addEventListener("DOMContentLoaded", function() {
         col.input.value = bike.model;
         col.clearBtn.style.display = "block";
         
-        // Populate year dropdown for this specific bike model
         const variations = motorcycles.filter(b => b.brand === bike.brand && b.model === bike.model);
         variations.sort((a, b) => b.year - a.year);
         
@@ -29712,6 +29786,8 @@ document.addEventListener("DOMContentLoaded", function() {
         col.yearContainer.style.display = "flex";
       }
     });
+    
+    updateColumnUI();
   }
 
   // Helper to get filtered unique models based on text search and global filter selectors
@@ -30250,6 +30326,38 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     window.history.replaceState({}, "", url);
   }
+
+  // Column Controls Add/Remove listeners
+  document.getElementById("add-column-btn").addEventListener("click", () => {
+    if (activeColumnsCount < 4) {
+      activeColumnsCount++;
+      activeSelections.push(null);
+      updateColumnUI();
+      updateComparison();
+    }
+  });
+
+  document.getElementById("remove-column-btn").addEventListener("click", () => {
+    if (activeColumnsCount > 2) {
+      const idxToRemove = activeColumnsCount - 1;
+      
+      const col = cols[idxToRemove];
+      col.input.value = "";
+      col.clearBtn.style.display = "none";
+      col.yearContainer.style.display = "none";
+      col.dropdown.style.display = "none";
+      
+      if (chartInstances[idxToRemove]) {
+        chartInstances[idxToRemove].destroy();
+        chartInstances[idxToRemove] = null;
+      }
+      
+      activeColumnsCount--;
+      activeSelections.pop();
+      updateColumnUI();
+      updateComparison();
+    }
+  });
 
   // Initial load from URL search params
   loadSelectionsFromUrl();
