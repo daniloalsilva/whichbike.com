@@ -22460,9 +22460,18 @@ function initFilters() {
     opt.value = c; opt.textContent = c;
     domElements.categoryFilter.appendChild(opt);
   });
+  
+  // Load state from URL parameters
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('brand')) domElements.brandFilter.value = params.get('brand');
+  if (params.has('category')) domElements.categoryFilter.value = params.get('category');
+  if (params.has('disp')) domElements.displacementFilter.value = params.get('disp');
+  if (params.has('weight')) domElements.weightFilter.value = params.get('weight');
+  if (params.has('seat')) domElements.seatFilter.value = params.get('seat');
+  if (params.has('page')) currentPage = parseInt(params.get('page')) || 1;
 }
 
-function applyFilters() {
+function applyFilters(resetPage = true) {
   const brand = domElements.brandFilter.value;
   const category = domElements.categoryFilter.value;
   const disp = domElements.displacementFilter.value;
@@ -22497,8 +22506,21 @@ function applyFilters() {
     return true;
   });
   
-  currentPage = 1;
+  if (resetPage) currentPage = 1;
   renderGallery();
+}
+
+function updateUrlState() {
+  const params = new URLSearchParams();
+  if (domElements.brandFilter.value) params.set('brand', domElements.brandFilter.value);
+  if (domElements.categoryFilter.value) params.set('category', domElements.categoryFilter.value);
+  if (domElements.displacementFilter.value !== 'all') params.set('disp', domElements.displacementFilter.value);
+  if (domElements.weightFilter.value !== 'all') params.set('weight', domElements.weightFilter.value);
+  if (domElements.seatFilter.value !== 'all') params.set('seat', domElements.seatFilter.value);
+  if (currentPage > 1) params.set('page', currentPage);
+  
+  const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
 }
 
 function renderGallery() {
@@ -22523,6 +22545,8 @@ function renderGallery() {
       </a>
     </div>
   `).join('');
+  
+  updateUrlState();
 }
 
 // Lightbox Logic
@@ -22573,7 +22597,7 @@ domElements.nextBtn.addEventListener('click', () => {
 
 // Init
 initFilters();
-applyFilters(); // Initial render
+applyFilters(false); // Initial render without resetting page to 1
 </script>
 
       
