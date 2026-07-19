@@ -339,7 +339,64 @@
     width: 100%;
   }
 }
+
+/* Lightbox overlay */
+.image-lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-lightbox-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.image-lightbox-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 2.5rem;
+  max-width: 85vw;
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  border: 4px solid #f5f5f7;
+  transform: scale(0.85);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
+}
+
+.image-lightbox-overlay.active .image-lightbox-card {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.image-lightbox-img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+  cursor: zoom-out;
+}
 </style>
+
+<div class="image-lightbox-overlay" id="image-lightbox">
+  <div class="image-lightbox-card">
+    <img src="" class="image-lightbox-img" id="lightbox-img" alt="Visualização expandida">
+  </div>
+</div>
 
 <script>
 // Flatten all bikes into a single JS array
@@ -22451,16 +22508,29 @@ function renderGallery() {
   const pageItems = filteredBikes.slice(startIdx, startIdx + ITEMS_PER_PAGE);
   
   domElements.grid.innerHTML = pageItems.map(b => `
-    <a href="${b.url}" class="gallery-item" style="text-decoration: none; color: inherit;">
-      <img src="${b.image}" alt="${b.brand} ${b.model}" loading="lazy">
-      <div class="gallery-item-info">
+    <div class="gallery-item">
+      <img src="${b.image}" alt="${b.brand} ${b.model}" loading="lazy" style="cursor: zoom-in;" onclick="openLightbox('${b.image}')">
+      <a href="${b.url}" class="gallery-item-info" style="text-decoration: none; color: inherit; display: block; border-top: 1px solid var(--color-border, #e9ecef);">
         <h4>${b.brand}</h4>
         <p>${b.model}</p>
         <p style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.7;">${b.category} • ${b.displacement}cc</p>
-      </div>
-    </a>
+      </a>
+    </div>
   `).join('');
 }
+
+// Lightbox Logic
+const lightbox = document.getElementById('image-lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+window.openLightbox = function(src) {
+  lightboxImg.src = src;
+  lightbox.classList.add('active');
+};
+
+lightbox.addEventListener('click', () => {
+  lightbox.classList.remove('active');
+});
 
 // Event Listeners
 domElements.brandFilter.addEventListener('change', applyFilters);
