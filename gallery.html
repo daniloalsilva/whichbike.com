@@ -263,12 +263,26 @@
 </div>
 
 <style>
+  /* Layout wide overrides for minimal-mistakes */
+  @media (min-width: 64em) {
+    .sidebar {
+      display: none !important;
+    }
+    .archive, .page {
+      width: 100% !important;
+      max-width: 96% !important;
+      padding-right: 0 !important;
+      margin: 0 auto !important;
+    }
+  }
+
 .gallery-container {
   display: flex;
   gap: 2rem;
-  max-width: 1240px;
+  max-width: 100% !important;
+  width: 100% !important;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 1.5rem 0.5rem;
 }
 .gallery-filters {
   width: 260px;
