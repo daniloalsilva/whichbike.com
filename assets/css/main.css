@@ -872,10 +872,10 @@ blockquote cite::before {
 
 /* links */
 a:visited {
-  color: rgb(38.25, 134.3, 231.2);
+  color: rgb(15%, 52.6666666667%, 90.6666666667%);
 }
 a:hover {
-  color: rgb(0, 96.05, 192.95);
+  color: rgb(0%, 37.6666666667%, 75.6666666667%);
   outline: 0;
 }
 
@@ -971,7 +971,7 @@ figcaption a {
   transition: all 0.2s ease-in-out;
 }
 figcaption a:hover {
-  color: rgb(0, 96.05, 192.95);
+  color: rgb(0%, 37.6666666667%, 75.6666666667%);
 }
 
 /* Fix IE9 SVG bug */
@@ -1051,7 +1051,7 @@ input[type=submit],
 form {
   margin-bottom: 5px;
   padding: 1em;
-  background-color: rgb(241.7, 242.5, 243.1);
+  background-color: rgb(94.7843137255%, 95.0980392157%, 95.3333333333%);
 }
 form fieldset {
   margin-bottom: 5px;
@@ -1396,7 +1396,7 @@ table + table {
 
 thead {
   background-color: #d2d2d7;
-  border-bottom: 2px solid rgb(157.5, 157.5, 161.25);
+  border-bottom: 2px solid rgb(61.7647058824%, 61.7647058824%, 63.2352941176%);
 }
 
 th {
@@ -1407,7 +1407,7 @@ th {
 
 td {
   padding: 0.5em;
-  border-bottom: 1px solid rgb(157.5, 157.5, 161.25);
+  border-bottom: 1px solid rgb(61.7647058824%, 61.7647058824%, 63.2352941176%);
 }
 
 tr,
@@ -1474,7 +1474,7 @@ th {
   color: #fff;
 }
 .btn--primary:hover {
-  background-color: rgb(0, 90.4, 181.6);
+  background-color: rgb(0%, 35.4509803922%, 71.2156862745%);
   color: #fff;
 }
 .btn--inverse {
@@ -1512,7 +1512,7 @@ th {
   color: #fff;
 }
 .btn--success:hover {
-  background-color: rgb(50.4, 132.8, 50.4);
+  background-color: rgb(19.7647058824%, 52.0784313725%, 19.7647058824%);
   color: #fff;
 }
 .btn--warning {
@@ -1524,7 +1524,7 @@ th {
   color: #fff;
 }
 .btn--warning:hover {
-  background-color: rgb(171.2, 101.6, 4);
+  background-color: rgb(67.137254902%, 39.8431372549%, 1.568627451%);
   color: #fff;
 }
 .btn--danger {
@@ -1536,7 +1536,7 @@ th {
   color: #fff;
 }
 .btn--danger:hover {
-  background-color: rgb(190.4, 76, 72.8);
+  background-color: rgb(74.6666666667%, 29.8039215686%, 28.5490196078%);
   color: #fff;
 }
 .btn--info {
@@ -1548,7 +1548,7 @@ th {
   color: #fff;
 }
 .btn--info:hover {
-  background-color: rgb(47.2, 124.8, 148.8);
+  background-color: rgb(18.5098039216%, 48.9411764706%, 58.3529411765%);
   color: #fff;
 }
 .btn--bluesky {
@@ -1560,7 +1560,7 @@ th {
   color: #fff;
 }
 .btn--bluesky:hover {
-  background-color: rgb(12.8, 104.8, 203.2);
+  background-color: rgb(5.0196078431%, 41.0980392157%, 79.6862745098%);
   color: #fff;
 }
 .btn--facebook {
@@ -1572,7 +1572,7 @@ th {
   color: #fff;
 }
 .btn--facebook:hover {
-  background-color: rgb(47.2, 71.2, 121.6);
+  background-color: rgb(18.5098039216%, 27.9215686275%, 47.6862745098%);
   color: #fff;
 }
 .btn--linkedin {
@@ -1584,7 +1584,7 @@ th {
   color: #fff;
 }
 .btn--linkedin:hover {
-  background-color: rgb(0, 98.4, 145.6);
+  background-color: rgb(0%, 38.5882352941%, 57.0980392157%);
   color: #fff;
 }
 .btn--mastodon {
@@ -1596,7 +1596,7 @@ th {
   color: #fff;
 }
 .btn--mastodon:hover {
-  background-color: rgb(34.4, 115.2, 173.6);
+  background-color: rgb(13.4901960784%, 45.1764705882%, 68.0784313725%);
   color: #fff;
 }
 .btn--twitter {
@@ -1608,7 +1608,7 @@ th {
   color: #fff;
 }
 .btn--twitter:hover {
-  background-color: rgb(68, 137.6, 190.4);
+  background-color: rgb(26.6666666667%, 53.9607843137%, 74.6666666667%);
   color: #fff;
 }
 .btn--x {
@@ -1681,9 +1681,9 @@ th {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
   font-size: 0.75em !important;
   text-indent: initial; /* override*/
-  background-color: rgb(233.7, 234.5, 236.7);
+  background-color: rgb(91.6470588235%, 91.9607843137%, 92.8235294118%);
   border-radius: 4px;
-  box-shadow: 0 1px 1px rgba(188.5, 192.5, 195.5, 0.25);
+  box-shadow: 0 1px 1px rgba(73.9215686275%, 75.4901960784%, 76.6666666667%, 0.25);
 }
 .notice h4,
 .markdown-alert h4 {
@@ -1709,19 +1709,19 @@ th {
 }
 .notice a,
 .markdown-alert a {
-  color: rgb(169.65, 173.25, 175.95);
+  color: rgb(66.5294117647%, 67.9411764706%, 69%);
 }
 .notice a:hover,
 .markdown-alert a:hover {
-  color: rgb(94.25, 96.25, 97.75);
+  color: rgb(36.9607843137%, 37.7450980392%, 38.3333333333%);
 }
 blockquote.notice, blockquote.markdown-alert {
-  border-inline-start-color: rgb(169.65, 173.25, 175.95);
+  border-inline-start-color: rgb(66.5294117647%, 67.9411764706%, 69%);
 }
 
 .notice code,
 .markdown-alert code {
-  background-color: rgb(239.35, 239.75, 241.85);
+  background-color: rgb(93.862745098%, 94.0196078431%, 94.8431372549%);
 }
 .notice pre code,
 .markdown-alert pre code {
@@ -1741,7 +1741,7 @@ blockquote.notice, blockquote.markdown-alert {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
   font-size: 0.75em !important;
   text-indent: initial; /* override*/
-  background-color: rgb(196, 218.6, 243);
+  background-color: rgb(76.862745098%, 85.7254901961%, 95.2941176471%);
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(0, 113, 227, 0.25);
 }
@@ -1769,19 +1769,19 @@ blockquote.notice, blockquote.markdown-alert {
 }
 .notice--primary a,
 .markdown-alert-important a {
-  color: rgb(0, 101.7, 204.3);
+  color: rgb(0%, 39.8823529412%, 80.1176470588%);
 }
 .notice--primary a:hover,
 .markdown-alert-important a:hover {
-  color: rgb(0, 56.5, 113.5);
+  color: rgb(0%, 22.1568627451%, 44.5098039216%);
 }
 blockquote.notice--primary, blockquote.markdown-alert-important {
-  border-inline-start-color: rgb(0, 101.7, 204.3);
+  border-inline-start-color: rgb(0%, 39.8823529412%, 80.1176470588%);
 }
 
 .notice--primary code,
 .markdown-alert-important code {
-  background-color: rgb(220.5, 231.8, 245);
+  background-color: rgb(86.4705882353%, 90.9019607843%, 96.0784313725%);
 }
 .notice--primary pre code,
 .markdown-alert-important pre code {
@@ -1801,7 +1801,7 @@ blockquote.notice--primary, blockquote.markdown-alert-important {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
   font-size: 0.75em !important;
   text-indent: initial; /* override*/
-  background-color: rgb(207.8, 227.2, 234.8);
+  background-color: rgb(81.4901960784%, 89.0980392157%, 92.0784313725%);
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(59, 156, 186, 0.25);
 }
@@ -1829,19 +1829,19 @@ blockquote.notice--primary, blockquote.markdown-alert-important {
 }
 .notice--info a,
 .markdown-alert-note a {
-  color: rgb(53.1, 140.4, 167.4);
+  color: rgb(20.8235294118%, 55.0588235294%, 65.6470588235%);
 }
 .notice--info a:hover,
 .markdown-alert-note a:hover {
-  color: rgb(29.5, 78, 93);
+  color: rgb(11.568627451%, 30.5882352941%, 36.4705882353%);
 }
 blockquote.notice--info, blockquote.markdown-alert-note {
-  border-inline-start-color: rgb(53.1, 140.4, 167.4);
+  border-inline-start-color: rgb(20.8235294118%, 55.0588235294%, 65.6470588235%);
 }
 
 .notice--info code,
 .markdown-alert-note code {
-  background-color: rgb(226.4, 236.1, 240.9);
+  background-color: rgb(88.7843137255%, 92.5882352941%, 94.4705882353%);
 }
 .notice--info pre code,
 .markdown-alert-note pre code {
@@ -1861,7 +1861,7 @@ blockquote.notice--info, blockquote.markdown-alert-note {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
   font-size: 0.75em !important;
   text-indent: initial; /* override*/
-  background-color: rgb(238.8, 221.4, 198.6);
+  background-color: rgb(93.6470588235%, 86.8235294118%, 77.8823529412%);
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(214, 127, 5, 0.25);
 }
@@ -1889,19 +1889,19 @@ blockquote.notice--info, blockquote.markdown-alert-note {
 }
 .notice--warning a,
 .markdown-alert-warning a {
-  color: rgb(192.6, 114.3, 4.5);
+  color: rgb(75.5294117647%, 44.8235294118%, 1.7647058824%);
 }
 .notice--warning a:hover,
 .markdown-alert-warning a:hover {
-  color: rgb(107, 63.5, 2.5);
+  color: rgb(41.9607843137%, 24.9019607843%, 0.9803921569%);
 }
 blockquote.notice--warning, blockquote.markdown-alert-warning {
-  border-inline-start-color: rgb(192.6, 114.3, 4.5);
+  border-inline-start-color: rgb(75.5294117647%, 44.8235294118%, 1.7647058824%);
 }
 
 .notice--warning code,
 .markdown-alert-warning code {
-  background-color: rgb(241.9, 233.2, 222.8);
+  background-color: rgb(94.862745098%, 91.4509803922%, 87.3725490196%);
 }
 .notice--warning pre code,
 .markdown-alert-warning pre code {
@@ -1921,7 +1921,7 @@ blockquote.notice--warning, blockquote.markdown-alert-warning {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
   font-size: 0.75em !important;
   text-indent: initial; /* override*/
-  background-color: rgb(208.6, 229.2, 210.2);
+  background-color: rgb(81.8039215686%, 89.8823529412%, 82.431372549%);
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(63, 166, 63, 0.25);
 }
@@ -1949,19 +1949,19 @@ blockquote.notice--warning, blockquote.markdown-alert-warning {
 }
 .notice--success a,
 .markdown-alert-tip a {
-  color: rgb(56.7, 149.4, 56.7);
+  color: rgb(22.2352941176%, 58.5882352941%, 22.2352941176%);
 }
 .notice--success a:hover,
 .markdown-alert-tip a:hover {
-  color: rgb(31.5, 83, 31.5);
+  color: rgb(12.3529411765%, 32.5490196078%, 12.3529411765%);
 }
 blockquote.notice--success, blockquote.markdown-alert-tip {
-  border-inline-start-color: rgb(56.7, 149.4, 56.7);
+  border-inline-start-color: rgb(22.2352941176%, 58.5882352941%, 22.2352941176%);
 }
 
 .notice--success code,
 .markdown-alert-tip code {
-  background-color: rgb(226.8, 237.1, 228.6);
+  background-color: rgb(88.9411764706%, 92.9803921569%, 89.6470588235%);
 }
 .notice--success pre code,
 .markdown-alert-tip pre code {
@@ -1981,7 +1981,7 @@ blockquote.notice--success, blockquote.markdown-alert-tip {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
   font-size: 0.75em !important;
   text-indent: initial; /* override*/
-  background-color: rgb(243.6, 215, 215.8);
+  background-color: rgb(95.5294117647%, 84.3137254902%, 84.6274509804%);
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(238, 95, 91, 0.25);
 }
@@ -2009,19 +2009,19 @@ blockquote.notice--success, blockquote.markdown-alert-tip {
 }
 .notice--danger a,
 .markdown-alert-caution a {
-  color: rgb(214.2, 85.5, 81.9);
+  color: rgb(84%, 33.5294117647%, 32.1176470588%);
 }
 .notice--danger a:hover,
 .markdown-alert-caution a:hover {
-  color: rgb(119, 47.5, 45.5);
+  color: rgb(46.6666666667%, 18.6274509804%, 17.8431372549%);
 }
 blockquote.notice--danger, blockquote.markdown-alert-caution {
-  border-inline-start-color: rgb(214.2, 85.5, 81.9);
+  border-inline-start-color: rgb(84%, 33.5294117647%, 32.1176470588%);
 }
 
 .notice--danger code,
 .markdown-alert-caution code {
-  background-color: rgb(244.3, 230, 231.4);
+  background-color: rgb(95.8039215686%, 90.1960784314%, 90.7450980392%);
 }
 .notice--danger pre code,
 .markdown-alert-caution pre code {
@@ -2216,11 +2216,11 @@ blockquote.notice--danger, blockquote.markdown-alert-caution {
   text-align: center;
   text-decoration: none;
   color: #86868b;
-  border: 1px solid rgb(157.5, 157.5, 161.25);
+  border: 1px solid rgb(61.7647058824%, 61.7647058824%, 63.2352941176%);
   border-radius: 0;
 }
 .pagination li a:hover {
-  color: rgb(0, 96.05, 192.95);
+  color: rgb(0%, 37.6666666667%, 75.6666666667%);
 }
 .pagination li a.current, .pagination li a.current.disabled {
   color: #fff;
@@ -2256,7 +2256,7 @@ blockquote.notice--danger, blockquote.markdown-alert-caution {
   text-align: center;
   text-decoration: none;
   color: #86868b;
-  border: 1px solid rgb(157.5, 157.5, 161.25);
+  border: 1px solid rgb(61.7647058824%, 61.7647058824%, 63.2352941176%);
   border-radius: 4px;
 }
 .pagination--pager:hover {
@@ -2451,7 +2451,7 @@ blockquote.notice--danger, blockquote.markdown-alert-caution {
     color: #7a8288;
     font-size: 0.75em;
     font-weight: bold;
-    border: 1px solid rgb(188.5, 192.5, 195.5);
+    border: 1px solid rgb(73.9215686275%, 75.4901960784%, 76.6666666667%);
     border-radius: 4px;
     z-index: 20;
     -webkit-transition: 0.2s ease-out;
@@ -2605,7 +2605,7 @@ blockquote.notice--danger, blockquote.markdown-alert-caution {
   border-start-end-radius: 4px;
 }
 .toc .active a {
-  background-color: rgb(204, 226.6, 249.4);
+  background-color: rgb(80%, 88.862745098%, 97.8039215686%);
   color: #3d4144;
 }
 
@@ -2754,7 +2754,7 @@ blockquote.notice--danger, blockquote.markdown-alert-caution {
   transition: 0.2s;
 }
 .search__toggle:hover {
-  color: rgb(0, 84.75, 170.25);
+  color: rgb(0%, 33.2352941176%, 66.7647058824%);
 }
 
 .search-icon {
@@ -3553,7 +3553,7 @@ body:hover .visually-hidden button {
 .greedy-nav__toggle:hover .navicon,
 .greedy-nav__toggle:hover .navicon:before,
 .greedy-nav__toggle:hover .navicon:after {
-  background: rgb(0, 84.75, 170.25);
+  background: rgb(0%, 33.2352941176%, 66.7647058824%);
 }
 .greedy-nav__toggle:hover.close .navicon {
   background: transparent;
@@ -3646,12 +3646,12 @@ body:hover .visually-hidden button {
    Footnotes
    ========================================================================== */
 .footnote {
-  color: rgb(155.25, 161.25, 165.75);
+  color: rgb(60.8823529412%, 63.2352941176%, 65%);
   text-decoration: none;
 }
 
 .footnotes {
-  color: rgb(155.25, 161.25, 165.75);
+  color: rgb(60.8823529412%, 63.2352941176%, 65%);
 }
 .footnotes ol,
 .footnotes li,
@@ -4103,12 +4103,12 @@ body {
   margin-bottom: 8px;
   padding: 5px 10px;
   text-decoration: none;
-  border: 1px solid rgb(157.5, 157.5, 161.25);
+  border: 1px solid rgb(61.7647058824%, 61.7647058824%, 63.2352941176%);
   border-radius: 4px;
 }
 .page__taxonomy-item:hover {
   text-decoration: none;
-  color: rgb(0, 96.05, 192.95);
+  color: rgb(0%, 37.6666666667%, 75.6666666667%);
 }
 
 .taxonomy__section {
