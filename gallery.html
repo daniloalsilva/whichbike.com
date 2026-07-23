@@ -35473,10 +35473,8 @@ const rawBikes = [
   
 ];
 
-// Deduplicate model variants of the same brand, clean family, and displacement
-const seenBikes = new Set();
-const allBikes = [];
-for (const bike of rawBikes) {
+function getBikeFamilyKey(bike) {
+  if (!bike) return "";
   let cleanModel = bike.model.toLowerCase();
   
   // Suffixes that mark version differences rather than distinct displacement families
@@ -35494,7 +35492,14 @@ for (const bike of rawBikes) {
   });
   cleaned = cleaned.replace(/\s+/g, ' ').trim();
   
-  const key = `${bike.brand.toLowerCase()}_${cleaned}_${bike.displacement}`;
+  return `${bike.brand.toLowerCase()}_${cleaned}_${bike.displacement}`;
+}
+
+// Deduplicate model variants of the same brand, clean family, and displacement
+const seenBikes = new Set();
+const allBikes = [];
+for (const bike of rawBikes) {
+  const key = getBikeFamilyKey(bike);
   if (!seenBikes.has(key)) {
     seenBikes.add(key);
     allBikes.push(bike);
@@ -35657,7 +35662,7 @@ function renderGallery() {
   const pageItems = filteredBikes.slice(startIdx, startIdx + ITEMS_PER_PAGE);
   
   domElements.grid.innerHTML = pageItems.map(b => {
-    const isChecked = selectedBikes.some(sb => sb.id === b.id);
+    const isChecked = selectedBikes.some(sb => getBikeFamilyKey(sb) === getBikeFamilyKey(b));
     return `
       <div class="gallery-item" id="item-${b.id}">
         <div class="gallery-item-select">
@@ -35685,17 +35690,18 @@ window.toggleSelectBike = function(id, checkbox) {
   const bike = allBikes.find(b => b.id === id);
   if (!bike) return;
 
+  const key = getBikeFamilyKey(bike);
   if (checkbox.checked) {
     if (selectedBikes.length >= 4) {
       alert("Você pode comparar até 4 motos simultaneamente!");
       checkbox.checked = false;
       return;
     }
-    if (!selectedBikes.some(sb => sb.id === id)) {
+    if (!selectedBikes.some(sb => getBikeFamilyKey(sb) === key)) {
       selectedBikes.push(bike);
     }
   } else {
-    selectedBikes = selectedBikes.filter(sb => sb.id !== id);
+    selectedBikes = selectedBikes.filter(sb => getBikeFamilyKey(sb) !== key);
   }
 
   // Save selected ids to localStorage
@@ -35704,12 +35710,23 @@ window.toggleSelectBike = function(id, checkbox) {
 };
 
 window.removeSelectedBike = function(id) {
-  selectedBikes = selectedBikes.filter(sb => sb.id !== id);
+  // Find the target bike to get its family key
+  const targetBike = rawBikes.find(b => b.id === id) || allBikes.find(b => b.id === id);
+  if (!targetBike) return;
+
+  const key = getBikeFamilyKey(targetBike);
+  selectedBikes = selectedBikes.filter(sb => getBikeFamilyKey(sb) !== key);
   localStorage.setItem('whichbike_selected_ids', JSON.stringify(selectedBikes.map(b => b.id)));
   
-  // Uncheck corresponding checkbox in current page if it exists
-  const checkbox = domElements.grid.querySelector(`.compare-checkbox[data-id="${id}"]`);
-  if (checkbox) checkbox.checked = false;
+  // Uncheck all corresponding checkboxes in current page if they exist
+  const checkboxes = domElements.grid.querySelectorAll(`.compare-checkbox`);
+  checkboxes.forEach(cb => {
+    const cbId = cb.getAttribute('data-id');
+    const cbBike = allBikes.find(b => b.id === cbId);
+    if (cbBike && getBikeFamilyKey(cbBike) === key) {
+      cb.checked = false;
+    }
+  });
   
   updateCompareBar();
 };
@@ -35778,7 +35795,8 @@ window.toggleLightboxCompare = function(id, btn) {
   const bike = allBikes.find(b => b.id === id);
   if (!bike) return;
 
-  const isSelected = selectedBikes.some(sb => sb.id === id);
+  const key = getBikeFamilyKey(bike);
+  const isSelected = selectedBikes.some(sb => getBikeFamilyKey(sb) === key);
   if (!isSelected) {
     if (selectedBikes.length >= 4) {
       alert("Você pode comparar até 4 motos simultaneamente!");
@@ -35788,15 +35806,27 @@ window.toggleLightboxCompare = function(id, btn) {
     btn.textContent = "Remover da Comparação ➖";
     
     // Sync gallery grid checkbox if present on screen
-    const checkbox = domElements.grid.querySelector(`.compare-checkbox[data-id="${id}"]`);
-    if (checkbox) checkbox.checked = true;
+    const checkboxes = domElements.grid.querySelectorAll(`.compare-checkbox`);
+    checkboxes.forEach(cb => {
+      const cbId = cb.getAttribute('data-id');
+      const cbBike = allBikes.find(b => b.id === cbId);
+      if (cbBike && getBikeFamilyKey(cbBike) === key) {
+        cb.checked = true;
+      }
+    });
   } else {
-    selectedBikes = selectedBikes.filter(sb => sb.id !== id);
+    selectedBikes = selectedBikes.filter(sb => getBikeFamilyKey(sb) !== key);
     btn.textContent = "Adicionar para Comparação ➕";
     
     // Sync gallery grid checkbox if present on screen
-    const checkbox = domElements.grid.querySelector(`.compare-checkbox[data-id="${id}"]`);
-    if (checkbox) checkbox.checked = false;
+    const checkboxes = domElements.grid.querySelectorAll(`.compare-checkbox`);
+    checkboxes.forEach(cb => {
+      const cbId = cb.getAttribute('data-id');
+      const cbBike = allBikes.find(b => b.id === cbId);
+      if (cbBike && getBikeFamilyKey(cbBike) === key) {
+        cb.checked = false;
+      }
+    });
   }
 
   localStorage.setItem('whichbike_selected_ids', JSON.stringify(selectedBikes.map(b => b.id)));
@@ -35821,7 +35851,7 @@ function renderLightboxContent() {
     "high": "Alto"
   }[bike.theft_risk] || bike.theft_risk || "Não informado";
 
-  const isSelected = selectedBikes.some(sb => sb.id === bike.id);
+  const isSelected = selectedBikes.some(sb => getBikeFamilyKey(sb) === getBikeFamilyKey(bike));
   
   const infoDiv = document.getElementById('lightbox-info');
   infoDiv.innerHTML = `
