@@ -383,6 +383,17 @@
   left: 8px;
   z-index: 10;
   display: block;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.gallery-item:hover .gallery-item-select {
+  opacity: 1;
+  pointer-events: auto;
+}
+.gallery-item-select:has(input:checked) {
+  opacity: 1;
+  pointer-events: auto;
 }
 .gallery-item-select input[type="checkbox"] {
   width: 22px;
