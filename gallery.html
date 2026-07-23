@@ -365,25 +365,22 @@
 /* Premium Transparent Card Style */
 .gallery-item {
   position: relative;
-  background: var(--color-bg-secondary, #1e1e24);
-  border-radius: 16px;
-  border: 1px solid var(--color-border, #2d2d34);
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s, border-color 0.3s;
+  background: transparent;
+  border: none;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   flex-direction: column;
   overflow: visible;
 }
 .gallery-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-  border-color: var(--color-primary, #0076ff);
+  transform: translateY(-4px);
 }
 
 /* Custom Checkbox overlay top-left */
 .gallery-item-select {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 8px;
+  left: 8px;
   z-index: 10;
   display: block;
 }
@@ -421,36 +418,40 @@
 .gallery-img-container {
   width: 100%;
   aspect-ratio: 16/9;
-  padding: 0.75rem;
+  padding: 0;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle, var(--color-border, #2d2d34) 0%, transparent 80%), rgba(255,255,255,0.02);
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  background: transparent;
   cursor: zoom-in;
-  overflow: hidden;
+  overflow: visible;
+  margin-bottom: 0.5rem;
 }
 .gallery-img-container img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  transform: scale(1.2);
   transition: transform 0.3s ease;
 }
 .gallery-item:hover .gallery-img-container img {
-  transform: scale(1.05);
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+  transform: scale(1.25);
 }
 
 /* Small label/legend details to valorize formatting */
 .gallery-item-info {
-  padding: 1rem;
-  border-top: 1px solid var(--color-border, #2d2d34);
+  padding: 0.85rem 1rem;
+  background: var(--color-bg-secondary, #1e1e24);
+  border: 1px solid var(--color-border, #2d2d34);
+  border-radius: 12px;
   text-decoration: none;
   color: inherit;
   display: block;
+  transition: border-color 0.2s, background 0.2s;
+}
+.gallery-item:hover .gallery-item-info {
+  border-color: var(--color-primary, #0076ff);
 }
 .gallery-item-info h4 {
   margin: 0 0 0.15rem 0;
