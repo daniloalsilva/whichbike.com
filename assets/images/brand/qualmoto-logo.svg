@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 360" role="img" aria-labelledby="title description">
+  <title id="title">QMoto</title>
+  <desc id="description">A palavra QMoto integrada ao perfil minimalista de uma motocicleta</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Q traseiro e M estrutural -->
+    <circle cx="145" cy="215" r="105" stroke="#00b86b" stroke-width="42"/>
+    <path d="M126 218 L205 294 H292 V125 L414 246 L536 125 V294 H205"
+          stroke="#00b86b" stroke-width="42"/>
+
+    <!-- Silhueta superior da motocicleta -->
+    <path d="M92 100 H188 C220 100 226 143 272 143 H326 C378 143 407 84 482 84 H570"
+          stroke="#202124" stroke-width="30"/>
+    <path d="M500 48 H566 C592 48 603 67 614 92 L650 187"
+          stroke="#202124" stroke-width="28"/>
+    <path d="M615 78 L648 58 V105" stroke="#202124" stroke-width="24"/>
+
+    <!-- A roda dianteira funciona como o primeiro o -->
+    <circle cx="650" cy="215" r="96" stroke="#202124" stroke-width="36"/>
+
+    <!-- to com a mesma altura visual da roda dianteira -->
+    <path d="M807 119 V279 C807 294 818 304 834 304 H851 M768 164 H850"
+          stroke="#202124" stroke-width="36"/>
+    <circle cx="1010" cy="215" r="96" stroke="#202124" stroke-width="36"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 420" role="img" aria-labelledby="title description">
+  <title id="title">QMoto</title>
+  <desc id="description">Monograma QM integrado ao perfil de uma motocicleta</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="145" cy="245" r="108" stroke="#00b86b" stroke-width="44"/>
+    <path d="M126 248 L205 327 H290 V155 L408 275 L526 155 V327 H205"
+          stroke="#00b86b" stroke-width="44"/>
+    <path d="M92 124 H188 C218 124 226 164 270 164 H324 C376 164 405 108 480 108 H552"
+          stroke="#202124" stroke-width="30"/>
+    <path d="M492 70 H545 C565 70 574 84 584 108" stroke="#202124" stroke-width="27"/>
+  </g>
+</svg>
